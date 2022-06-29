@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 #include "lists.h"
-
 /**
  * main - check the code
  *
@@ -36,6 +35,7 @@ int main(void)
         current = current->next;
     temp = current->next;
     current->next = head;
+    print_listint(head);
 
     if (check_cycle(head) == 0)
         printf("Linked list has no cycle\n");
