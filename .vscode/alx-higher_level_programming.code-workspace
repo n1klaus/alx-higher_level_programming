@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"activestate.promptRuntimeCreation": false,
+		"files.autoSave": "afterDelay",
+		"editor.wordWrap": "wordWrapColumn",
+		"editor.insertSpaces": false
+	}
+}
