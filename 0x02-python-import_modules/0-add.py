@@ -8,6 +8,6 @@ if inside the main module
 a = 1
 b = 2
 if __name__ == "__main__":
-    print("{} + {} = {}".format(a, b, add(a, b)))
+    print("{} + {} = {}".format(int(a), int(b), int(add(a, b))))
 else:
     print("{}".format(""), end="")
