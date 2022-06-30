@@ -1,3 +1,3 @@
 #!/usr/bin/python3
-alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-print("{}".format(alphabets))
+str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+print("{}".format(str))
