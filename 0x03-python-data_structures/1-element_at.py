@@ -7,6 +7,7 @@ def element_at(my_list, idx):
         idx: index of element
 
     Returns:
-        index of the list element
+        index of the list element if True
+        None if False
     """
     return None if 0 < idx > len(my_list) else my_list[idx]
