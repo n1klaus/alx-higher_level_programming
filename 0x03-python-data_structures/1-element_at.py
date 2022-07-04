@@ -10,4 +10,4 @@ def element_at(my_list, idx):
         index of the list element if True
         None if False
     """
-    return None if 0 < idx > len(my_list) - 1 else my_list[idx]
+    return None if idx < 0 or idx > len(my_list) - 1 else my_list[idx]
