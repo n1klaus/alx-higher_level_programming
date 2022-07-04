@@ -8,6 +8,10 @@ def multiple_returns(sentence):
     Returns:
         length of tuple and the first character
     """
-    first_char = sentence[0]
-    length = len(sentence)
-    return length, first_char
+    if len(sentence) > 0:
+        first_char = sentence[0]
+        length = len(sentence)
+        return length, first_char
+    else:
+        length = len(sentence)
+        return length, None
