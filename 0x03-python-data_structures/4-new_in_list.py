@@ -12,7 +12,7 @@ def new_in_list(my_list, idx, element):
         old list if False
     """
     new_list = my_list[:]
-    if idx < 0 or idx > len(new_list):
+    if idx < 0 or idx > len(new_list) - 1:
         return new_list
     else:
         new_list[idx] = element
