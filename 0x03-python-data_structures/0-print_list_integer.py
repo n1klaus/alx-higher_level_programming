@@ -8,5 +8,4 @@ def print_list_integer(my_list=[]):
     Returns:
         list item
     """
-    for index in range(len(my_list)):
-        print("{}".format(my_list[index]))
+    [print("{:d}".format(my_list[index])) for index in range(len(my_list))]
