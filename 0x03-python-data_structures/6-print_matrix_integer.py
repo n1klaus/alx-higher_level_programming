@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 def print_matrix_integer(matrix=[[]]):
-    """My c characters removing function
+    """My matrix printing function
 
     Args:
-        my_string: string
+        matrix: 2 dimensional array
 
     Returns:
-        new string without characters c or C
+        integer in matrix
     """
     for row in matrix:
         for column in range(len(row)):
             if column is not len(row) - 1:
-                print("{}".format(row[column]), end=" ")
+                print("{:d}".format(row[column]), end=" ")
             else:
-                print("{}".format(row[column]), end="")
+                print("{:d}".format(row[column]), end="")
         print("".format())
