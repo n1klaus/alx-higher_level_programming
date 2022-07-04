@@ -10,6 +10,6 @@ def delete_at(my_list=[], idx=0):
         list with removed index or
         unchanged list if range is invalid
     """
-    if idx > 0 and idx in range(len(my_list)):
+    if idx > 0 and idx < len(my_list):
         del my_list[idx]
     return my_list
