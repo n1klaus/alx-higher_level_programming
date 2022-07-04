@@ -15,36 +15,34 @@ int is_palindrome(listint_t **head)
 		return (1);
 
 	current  = *head;
-    *store = current->n;
-    /*printf("<%d> :Element in store\n", store[0]);*/
+	*store = current->n;
+
 	for (; current != NULL; t++)
 	{
 		current = current->next;
-        if (current != NULL)
-        {
-            store[t] = current->n;
-            /*printf("<%d> :Element in store\n", store[t]);*/
-            c++;
-        }
+		if (current != NULL)
+		{
+			store[t] = current->n;
+			c++;
+		}
 	}
 
-    /*printf("<%d> Total Elements\n", c);*/
-    if (c % 2 == 0)
-    {
-        l = c / 2 - 1;
-        u = c / 2;
-    }
-    else
-    {
-        l = c / 2 - 1;
-        u = c / 2 + 1;
-    }
+	if (c % 2 == 0)
+	{
+		l = c / 2 - 1;
+		u = c / 2;
+	}
+	else
+	{
+		l = c / 2 - 1;
+		u = c / 2 + 1;
+	}
 
 	while (l >= 0 && u <= c)
 	{
 		if (store[l--] != store[u++])
 			return (0);
 	}
-    free(store);
+	free(store);
 	return (1);
 }
