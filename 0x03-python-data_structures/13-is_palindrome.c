@@ -6,29 +6,45 @@
  * Return: 0 if it is not a palindrome,
  * 1 if it is a palindrome
  */
-int is_palindrome(listint_t **head);
+int is_palindrome(listint_t **head)
 {
 	listint_t *current = NULL;
-	int i = 0, j, *store = malloc(sizeof(int) * BUFSIZ);
+	int l = 0, c = 1, u = 0, t = 1, *store = malloc(BUFSIZ);
 
 	if (*head == NULL)
 		return (1);
 
 	current  = *head;
-	for (; current != NULL; store++)
+    *store = current->n;
+    /*printf("<%d> :Element in store\n", store[0]);*/
+	for (; current != NULL; t++)
 	{
-		*store = current->n;
 		current = current->next;
+        if (current != NULL)
+        {
+            store[t] = current->n;
+            /*printf("<%d> :Element in store\n", store[t]);*/
+            c++;
+        }
 	}
 
-	j = len(store) - 1;
-	while (store-- && (j != j / 2))
+    /*printf("<%d> Total Elements\n", c);*/
+    if (c % 2 == 0)
+    {
+        l = c / 2 - 1;
+        u = c / 2;
+    }
+    else
+    {
+        l = c / 2 - 1;
+        u = c / 2 + 1;
+    }
+
+	while (l >= 0 && u <= c)
 	{
-		if (store[i++] == store[j--])
-			continue;
-		else
+		if (store[l--] != store[u++])
 			return (0);
 	}
-	free(store);
+    free(store);
 	return (1);
 }
