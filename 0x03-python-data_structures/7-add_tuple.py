@@ -26,6 +26,6 @@ def add_tuple(tuple_a=(), tuple_b=()):
             sum1 = tuple_a[0] + 0
             sum2 = tuple_a[1] + 0
         else:
-            sum1 += 0
-            sum2 += 0
+            sum1 = 0
+            sum2 = 0
     return sum1, sum2
