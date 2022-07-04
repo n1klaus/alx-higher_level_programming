@@ -9,9 +9,9 @@ def print_matrix_integer(matrix=[[]]):
         new string without characters c or C
     """
     for row in matrix:
-        for column in row:
-            if column is not len(row):
-                print("{}".format(column), end=" ")
+        for column in range(len(row)):
+            if column is not len(row) - 1:
+                print("{}".format(row[column]), end=" ")
             else:
-                print("{}".format(column), end="")
+                print("{}".format(row[column]), end="")
         print("".format())

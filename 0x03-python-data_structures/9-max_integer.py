@@ -8,5 +8,5 @@ def max_integer(my_list=[]):
     Returns:
         largest integer in the list
     """
-    my_list.sorted()
+    my_list.sort()
     return my_list[-1]

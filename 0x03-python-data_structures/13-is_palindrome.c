@@ -8,27 +8,27 @@
  */
 int is_palindrome(listint_t **head);
 {
-    listint_t *current = NULL;
-    int i = 0, j, *store = malloc(sizeof(int) * BUFSIZ);
+	listint_t *current = NULL;
+	int i = 0, j, *store = malloc(sizeof(int) * BUFSIZ);
 
-    if (*head == NULL)
-        return (1);
-    
-    current  = *head;
-    for (; current != NULL; store++)
-    {
-        *store = current->n;
-        current = current->next;
-    }
+	if (*head == NULL)
+		return (1);
 
-    j = len(store) - 1;
-    while(store-- && (j != j / 2))
-    {
-        if (store[i++] == store[j--])
-            continue;
-        else
-            return (0);
-    }
-    free(store);
-    return (1);
+	current  = *head;
+	for (; current != NULL; store++)
+	{
+		*store = current->n;
+		current = current->next;
+	}
+
+	j = len(store) - 1;
+	while (store-- && (j != j / 2))
+	{
+		if (store[i++] == store[j--])
+			continue;
+		else
+			return (0);
+	}
+	free(store);
+	return (1);
 }

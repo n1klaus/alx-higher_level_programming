@@ -6,11 +6,14 @@ def divisible_by_2(my_list=[]):
         my_list: list of integers
 
     Returns:
-		new list with boolean values
+        new list with boolean values with values
         True if integer is a multiple of 2
-		False if integer is not a multiple of 2
+        False if integer is not a multiple of 2
     """
     checker = []
     for num in range(len(my_list)):
-        checker[num] = True if my_list[num] % 2 == 0 else False
+        if my_list[num] % 2 == 0:
+            checker.append(True)
+        else:
+            checker.append(False)
     return checker
