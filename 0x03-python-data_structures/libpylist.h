@@ -32,9 +32,9 @@ typedef struct pyTypeObject{
     typedef ssize_t ob_refcnt;
     typedef char* ob_type;
 	typedef size_t ob_size;
-}PyListObject;
+}PyObject;
 
-int PyList_Check(PyListObject *p);
-void print_python_list_info(PyListObject *p);
+int PyList_Check(PyObject *p);
+void print_python_list_info(PyObject *p);
 
 #endif /* __LIBPYLIST_H__*/

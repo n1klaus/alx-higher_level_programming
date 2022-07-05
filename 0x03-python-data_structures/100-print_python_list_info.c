@@ -6,7 +6,7 @@
  * 
  * Return : 0 if successful; 1 otherwise
  */
-int PyList_Check(PyListObject *p)
+int PyList_Check(PyObject *p)
 {
 	if (sizeof(p) / sizeof(p[0]) > 1)
 	{
@@ -28,7 +28,7 @@ int PyList_Check(PyListObject *p)
  * 
  * Return : Nothing
  */
-void print_python_list_info(PyListObject *p)
+void print_python_list_info(PyObject *p)
 {
 	size_t index = 0, len;
 
