@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-def __repr__(): return "#pythoniscool"
+__import__("os").write(1, "#pythoniscool\n".encode("UTF-8"))
