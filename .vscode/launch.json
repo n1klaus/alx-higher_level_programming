@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "c:/Users/Admin/Documents/C/alx-higher_level_programming/0x03-python-data_structures",
-      "program": "c:/Users/Admin/Documents/C/alx-higher_level_programming/0x03-python-data_structures/build/Debug/outDebug",
+      "cwd": "c:/Users/Admin/Documents/C/alx-higher_level_programming/0x04-python-more_data_structures",
+      "program": "c:/Users/Admin/Documents/C/alx-higher_level_programming/0x04-python-more_data_structures/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
