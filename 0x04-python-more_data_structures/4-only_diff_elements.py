@@ -9,11 +9,4 @@ def only_diff_elements(set_1, set_2):
     Returns:
         set of distinct elements in both sets
     """
-    new_list = []
-    for elem in list(set_1):
-        for item in list(set_2):
-            if elem not in list(set_2):
-                new_list.append(elem)
-            if item not in list(set_1):
-                new_list.append(item)
-    return set(new_list)
+    return set(set_1 ^ set_2)
