@@ -15,7 +15,7 @@ def roman_to_int(roman_string):
             for r in list(romans.items()):
                 if roman_string[char] is r[0]:
                     if roman_string[char] == "I" and \
-					   char < len(roman_string) - 1:
+                            char < len(roman_string) - 1:
                         if roman_string[char + 1] == "V":
                             val += 4
                             return int(val)
