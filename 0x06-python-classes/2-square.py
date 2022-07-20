@@ -1,24 +1,27 @@
 #!/usr/bin/python3
-class Square():
-    """Class definition for a square.
+""" Module to define a square class """
 
-    Args:
-        size (:obj:'int', optional): size of the length
+
+class Square():
+    """Class definition for a square of given size
 
     Attributes:
-        __size (int): size of the length of the new instance
+        __size (int): size of the length
 
     """
 
     def __init__(self, size=0):
+        """ The constructor to initialize new square objects
+
+        Args:
+            size (int): size of the length
+
+        """
         self.__size = size
 
     @property
     def _size(self):
         """Getter method to retrieve private attributes of the instance.
-
-        Args:
-            None
 
         Returns:
             size of the length of the instance.
@@ -34,7 +37,7 @@ class Square():
             size (:obj:'int'): size of the length of the new instance
 
         Returns:
-            size of the length of the instance.
+            int: size of the length of the instance.
 
         """
         try:
