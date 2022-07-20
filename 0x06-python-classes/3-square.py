@@ -1,40 +1,20 @@
 #!/usr/bin/python3
-class Square():
-    """Class definition for a square.
+""" Module to define a square class """
 
-    Args:
-        size (:obj:'int', optional): size of the length
+
+class Square():
+    """Class definition for a square of given size
 
     Attributes:
-        __size (int): size of the length of the new instance
+        __size (int): size of the length
 
     """
 
     def __init__(self, size=0):
-        self.__size = size
-
-    @property
-    def _size(self):
-        """Getter method to retrieve private attributes of the instance.
+        """ The constructor to initialize new square objects
 
         Args:
-            None
-
-        Returns:
-            size of the length of the instance.
-
-        """
-        return self.__size
-
-    @_size.setter
-    def _size(self, size):
-        """Setter method to change private attributes of the instance.
-
-        Args:
-            size (:obj:'int'): size of the length of the new instance
-
-        Returns:
-            size of the length of the instance.
+            size (:obj:'int'): size of the length
 
         """
         try:
@@ -46,17 +26,12 @@ class Square():
             print("size must be >= 0".format())
         except Exception:
             raise
-        finally:
-            return self.__size
 
     def area(self):
-        """Method to calculate the area of the square for the instance.
-
-        Args:
-            None
+        """Method to calculate the area of the square
 
         Returns:
-            area of the square for the instance.
+            int: area of the square for the instance
 
         """
         return self.__size ** 2
