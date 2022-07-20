@@ -8,4 +8,4 @@
 `100-safe_print_integer_err.py` - Prints an integer\
 `101-safe_function.py` -  Executes a function safely\
 `102-magic_calculation.py` - Bytecode interpretation\
-`103-python.c` - C functions that print some basic info about Python lists, Python bytes an Python float objects
+`103-python.c` - C functions that print some basic info about Python lists, Python bytes and Python float objects
