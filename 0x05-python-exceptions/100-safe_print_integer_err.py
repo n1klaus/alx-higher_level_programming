@@ -12,10 +12,9 @@ def safe_print_integer_err(value):
         True if value is an integer, and prints it
         Otherwise False and prints error in stderr
     """
-    status = 0
     try:
         print("{:d}".format(value))
-        status = 1
+        return True
     except Exception as e:
         sys.stderr.write("Exception {}\n".format(e))
-    return status
+        return False
