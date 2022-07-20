@@ -28,7 +28,7 @@ class Square():
             raise
 
     @property
-    def _size(self):
+    def size(self):
         """Getter method to retrieve private attributes
 
         Returns:
@@ -37,8 +37,8 @@ class Square():
         """
         return self.__size
 
-    @_size.setter
-    def _size(self, value):
+    @size.setter
+    def size(self, value):
         """Setter method to change private attributes
 
         Args:
