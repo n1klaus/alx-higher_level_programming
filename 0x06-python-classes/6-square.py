@@ -112,7 +112,7 @@ class Square():
             print("".format())
         for r in range(self.__size):
             if self.__position[1] > 0:
-                for p in range(self.__position[0]):
+                for p in range(self.__position[1]):
                     print(" ".format(p), end="")
             for c in range(self.__size):
                 print("#".format(c), end="")
