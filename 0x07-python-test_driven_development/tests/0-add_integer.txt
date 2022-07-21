@@ -1,0 +1,53 @@
+# 0-add_integer.txt
+
+===============================
+ How to Use 0-add_integer.py
+===============================
+
+This library is very simple, since it only has one function called
+``add_integer()``.
+
+Numbers
+=======
+``add_integer()`` returns the sum of its arguments.  For numbers,
+that value is equivalent to using the ``+`` operator.
+
+::
+	>>> import sys
+	>>> sys.path.insert(0, '/alx-higher_level_programming/0x07-python-test_driven_development')
+	>>> from 0-add_integer import add_integer
+	>>> add_integer(1, 2)
+	3
+	>>> add_integer(100, -2)
+	98
+
+Since it only has one positional argument required
+which is the first parameter, the second parameter value defaults
+to the supplied value if only one arguments is given.
+
+::
+	>>> add_integer(2)
+	100
+
+It also works with floating-point values since argument values
+are casted into integers during the operation
+
+::
+	>>> add_integer(100.3, -2)
+	98
+
+Non-Numbers
+===========
+Because the ``+`` symbol is also defined on data types other than numbers
+and we are only working with integer numbers and floating point numbers only
+a TypeError Exception is raised for types string, list, dictionary, or a tuple
+therefore printing the custom error message.
+
+::
+	>>> add_integer(4, "School") # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
+	b must be an integer
+	>>> add_integer("School", 4) # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
+	a must be an integer
+	>>> add_integer(None)
+	a must be an integer
+	"""
