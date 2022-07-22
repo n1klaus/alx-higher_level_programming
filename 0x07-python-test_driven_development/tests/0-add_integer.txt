@@ -9,13 +9,11 @@ This library is very simple, since it only has one function called
 
 Numbers
 =======
-``add_integer()`` returns the sum of its arguments.  For numbers,
-that value is equivalent to using the ``+`` operator.
+``add_integer()`` returns the sum of its arguments.
+For numbers, that value is equivalent to using the ``+`` operator.
 
 ::
-	>>> import sys
-	>>> sys.path.insert(0, '/alx-higher_level_programming/0x07-python-test_driven_development')
-	>>> from 0-add_integer import add_integer
+	>>> add_integer = __import__('0-add_integer').add_integer
 	>>> add_integer(1, 2)
 	3
 	>>> add_integer(100, -2)
@@ -35,19 +33,21 @@ are casted into integers during the operation
 ::
 	>>> add_integer(100.3, -2)
 	98
+	>>> add_integer(1.9999999, 99.999)
+	100
 
 Non-Numbers
 ===========
-Because the ``+`` symbol is also defined on data types other than numbers
-and we are only working with integer numbers and floating point numbers only
-a TypeError Exception is raised for types string, list, dictionary, or a tuple
-therefore printing the custom error message.
+Because the ``+`` operator is also defined on data types other than numbers and we are only working with integer numbers and floating point numbers
+a TypeError Exception is raised for types string, list, dictionary, or a tuple therefore printing the custom TypeError Exception message.
 
 ::
 	>>> add_integer(4, "School") # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
-	b must be an integer
+	Traceback (most recent call last):
+	TypeError: b must be an integer
 	>>> add_integer("School", 4) # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
-	a must be an integer
-	>>> add_integer(None)
-	a must be an integer
-	"""
+	Traceback (most recent call last):
+	TypeError: a must be an integer
+	>>> add_integer(None) # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
+	Traceback (most recent call last):
+	TypeError: a must be an integer
