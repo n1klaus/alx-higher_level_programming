@@ -90,9 +90,16 @@ class Rectangle():
             raise
 
     def area(self):
-        """ Method to compute the area of the rectangle instance """
+        """ Method to compute the area of the rectangle instance
+
+        Returns:
+            The area of the rectangle"""
         return self.__width * self.__height
 
     def perimeter(self):
-        """ Method to compute the perimeter of the rectangle instance """
+        """ Method to compute the perimeter of the rectangle instance
+
+        Returns:
+            The perimeter of the rectangle
+        """
         return (2 * (self.__width + self.__height))
