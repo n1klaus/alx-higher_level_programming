@@ -18,23 +18,27 @@ class Rectangle():
             height (int, optional): height of the Rectangle
         """
         try:
-            if isinstance(height, int) and height > 0:
-                self.__height = height
+            if isinstance(height, int) and height >= 0:
+                self.__height = int(height)
         except ValueError:
-            Exception("width must be >= 0")
+            print("height must be >= 0".format())
         except TypeError:
-            TypeError("width must be an integer")
+            print("height must be an integer".format())
+        except Exception:
+            raise
 
         try:
-            if isinstance(width, int) and width > 0:
-                self.__width = width
+            if isinstance(width, int) and width >= 0:
+                self.__width = int(width)
         except ValueError:
-            Exception("width must be >= 0")
+            print("width must be >= 0".format())
         except TypeError:
-            TypeError("width must be an integer")
+            print("width must be an integer".format())
+        except Exception:
+            raise
 
     @property
-    def width(self):
+    def _width(self):
         """ Getter method to retrieve instance width attribute
 
         Returns:
@@ -42,17 +46,25 @@ class Rectangle():
         """
         return self.__width
 
-    @width.setter
-    def width(self, width):
+    @_width.setter
+    def _width(self, width):
         """ Setter method to change instance width attribute
 
         Args:
             width (int): width of the retangle instance
         """
-        self.__width = width
+        try:
+            if isinstance(width, int) and width >= 0:
+                self.__width = int(width)
+        except ValueError:
+            print("width must be >= 0".format())
+        except TypeError:
+            print("width must be an integer".format())
+        except Exception:
+            raise
 
     @property
-    def height(self):
+    def _height(self):
         """ Getter method to retrieve height attribute
 
         Returns:
@@ -60,11 +72,19 @@ class Rectangle():
         """
         return self.__height
 
-    @height.setter
-    def height(self, height):
+    @_height.setter
+    def _height(self, height):
         """ Setter method to change the height attribute
 
         Args:
             height (int): height of the rectangle instances
         """
-        self.__height = height
+        try:
+            if isinstance(height, int) and height >= 0:
+                self.__height = int(height)
+        except ValueError:
+            print("height must be >= 0".format())
+        except TypeError:
+            print("height must be an integer".format())
+        except Exception:
+            raise
