@@ -38,7 +38,7 @@ class Rectangle():
             raise
 
     @property
-    def _width(self):
+    def width(self):
         """ Getter method to retrieve instance width attribute
 
         Returns:
@@ -46,8 +46,8 @@ class Rectangle():
         """
         return self.__width
 
-    @_width.setter
-    def _width(self, width):
+    @width.setter
+    def width(self, width):
         """ Setter method to change instance width attribute
 
         Args:
@@ -64,7 +64,7 @@ class Rectangle():
             raise
 
     @property
-    def _height(self):
+    def height(self):
         """ Getter method to retrieve height attribute
 
         Returns:
@@ -72,8 +72,8 @@ class Rectangle():
         """
         return self.__height
 
-    @_height.setter
-    def _height(self, height):
+    @height.setter
+    def height(self, height):
         """ Setter method to change the height attribute
 
         Args:
