@@ -13,7 +13,7 @@ class TestMaxInteger(unittest.TestCase):
 
     def test_listIsEmpty(self):
         list = []
-        self.assertEqual(len(list), 0)
+        self.assertEqual(len(list) == 0, True)
 
     def test_isIntegerList(self):
         list = [1, 2, 3]
@@ -22,15 +22,21 @@ class TestMaxInteger(unittest.TestCase):
 
     def test_isEqual(self):
         list = [1, 1]
-        for i in range(len(list)):
-            if i < len(list) - 1 and list[i] == list[i + 1]:
-                self.assertEqual(self, True)
+        for index in range(len(list)):
+            if index < len(list) - 1 and list[index] == list[index + 1]:
+                self.assertEqual((list[index] - list[index + 1]) == 0, True)
 
     def test_isLarger(self):
         list = [3, 2, 1]
-        for i in range(len(list)):
-            if i < len(list) - 1 and list[i] > list[i + 1]:
-                self.assertEqual(self, True)
+        for index in range(len(list)):
+            if index < len(list) - 1 and list[index] > list[index + 1]:
+                self.assertEqual((list[index] - list[index + 1]) > 0, True)
+
+    def test_isSmaller(self):
+        list = [1, 2, 3]
+        for index in range(len(list)):
+            if index < len(list) - 1 and list[index] < list[index + 1]:
+                self.assertEqual((list[index] - list[index + 1]) < 0, True)
 
 if __name__ == '__main__':
     unittest.main()
