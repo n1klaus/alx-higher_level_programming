@@ -1,0 +1,63 @@
+# 5-text_indentation.txt
+
+===============================
+ How to Use 5-text_indentation.py
+===============================
+
+This library is very simple, since it only has one function called
+``text_indentation()``.
+
+Strings
+=======
+``text_indentation()`` adds two end of line terminators after 
+reaching text with characters '.' '?' ':'
+
+::
+	>>> text_indentation = __import__('4-text_indentation').text_indentation
+	>>> text_indentation("Hello. I am here")
+	Hello.
+
+    I am here
+	>>> text_indentation("She said: I am here")
+	>>> text_indentation("What next? I am here")
+
+Providing no argument to the function will output a TypeError Exception
+error message as a positional argument is required
+
+::
+	>>> text_indentation()
+	Traceback (most recent call last):
+	TypeError: print_square() missing 1 required positional argument: 'size'
+
+Providing an empty string or the matching characters only will give output
+as required.
+
+::
+	>>> text_indentation("")
+	Traceback (most recent call last):
+	ValueError: size must be >= 0
+	>>> text_indentation(".")
+	>>> text_indentation(":")
+	>>> text_indentation("?")
+	>>> text_indentation(School)
+	SyntaxError: invalid syntax. Perhaps you forgot a comma?
+
+Non-Strings
+===========
+A custom TypeError Exception is raised for types other than string therefore printing the Exception message.
+
+::
+	>>> text_indentation([[1, 2, 3], [4, 5, 6]])
+	Traceback (most recent call last):
+	TypeError: size must be an integer
+	>>> text_indentation([1, 2, 3])
+	Traceback (most recent call last):
+	TypeError: size must be an integer
+    >>> text_indentation((1, 2))
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+    >>> text_indentation(1, 2)
+    Traceback (most recent call last):
+    TypeError: print_square() takes 1 positional argument but 2 were given
+	>>> text_indentation(School)
+	SyntaxError: invalid syntax. Perhaps you forgot a comma?

@@ -1,0 +1,56 @@
+# 3-say_my_name.txt
+
+===============================
+ How to Use 3-say_my_name.py
+===============================
+
+This library is very simple, since it only has one function called
+``say_my_name()``.
+
+Strings
+=======
+``say_my_name()`` prints two strings, first name and last name
+as provided in its arguments.
+
+::
+	>>> say_my_name = __import__('3-say_my_name').say_my_name
+	>>> say_my_name("John", "Smith")
+	My name is John Smith
+	>>> say_my_name("Walter", "White")
+	My name is Walter White
+
+Providing only one positional argument will only print
+the first name as the second argument is optional, defaulting
+to an empty string
+
+::
+	>>> say_my_name("Bob")
+	My name is Bob 
+
+Providing no arguments or an empty string for the first arguement prints
+a custom TypeError message as a string is required for printing the name
+
+::
+	>>> say_my_name()
+	Traceback (most recent call last):
+	TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+	>>> say_my_name("")
+	Traceback (most recent call last):
+	TypeError: first_name must be a string
+
+Non-Strings
+===========
+A custom TypeError Exception error is raised for types which are
+not strings or of alphanumeric character type, therefore printing the 
+custom TypeError Exception message.
+
+::
+	>>> say_my_name(4, 4)
+	Traceback (most recent call last):
+	TypeError: first_name must be a string
+	>>> say_my_name(4, "Bob")
+	Traceback (most recent call last):
+	TypeError: first_name must be a string
+	>>> say_my_name("Bob", 4)
+	Traceback (most recent call last):
+	TypeError: last_name must be a string
