@@ -82,6 +82,6 @@ class Rectangle():
             The perimeter of the rectangle
         """
         perimeter = 0
-        if self.__width != 0 or self.__height != 0:
+        if self.__width != 0 and self.__height != 0:
             perimeter = 2 * (self.__width + self.__height)
         return perimeter
