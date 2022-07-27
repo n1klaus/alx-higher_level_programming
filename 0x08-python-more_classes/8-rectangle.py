@@ -106,7 +106,7 @@ class Rectangle():
             The perimeter of the rectangle
         """
         perimeter = 0
-        if self.__width != 0 or self.__height != 0:
+        if self.__width != 0 and self.__height != 0:
             perimeter = 2 * (self.__width + self.__height)
         return perimeter
 
@@ -129,13 +129,14 @@ class Rectangle():
         return rect_1
 
     def __str__(self):
-        """ Print # characters for the size of the rectangle """
-        for h in range(self.__height):
-            for w in range(self.__width):
-                print("{}".format(self.print_symbol), end="")
-            if h != self.__height - 1:
-                print("".format(h))
-        return "".format()
+        print_string = ""
+        if self.__width != 0 and self.__height != 0:
+            for h in range(self.__height):
+                for w in range(self.__width):
+                    print_string += "#".format(w)
+                if h != self.__height - 1:
+                    print_string += "\n".format(h)
+        return print_string
 
     def __repr__(self):
         """ Print the command representation of creating
