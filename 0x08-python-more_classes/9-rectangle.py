@@ -125,8 +125,8 @@ class Rectangle():
         """ Method to create a square instance from a rectangle """
         if isinstance(size, int):
             if size > 0:
-                h = w = size
-                return cls(w, h)
+                height = width = size
+                return cls(width, height)
             else:
                 raise ValueError
         else:
