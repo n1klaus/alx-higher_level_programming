@@ -6,8 +6,8 @@ class Rectangle():
     """ Class definition for a rectangle
 
     Attributes:
-        __width (int): widht of the rectangle
-        __height (int): height of the rectangle
+        width (int): widht of the rectangle
+        height (int): height of the rectangle
     """
 
     def __init__(self, width=0, height=0):
@@ -19,7 +19,7 @@ class Rectangle():
         """
         if isinstance(height, int):
             if height >= 0:
-                self.__height = height
+                self.height = height
             else:
                 raise ValueError("height must be >= 0")
         else:
@@ -27,7 +27,7 @@ class Rectangle():
 
         if isinstance(width, int):
             if width >= 0:
-                self.__width = width
+                self.width = width
             else:
                 raise ValueError("width must be >= 0")
         else:
