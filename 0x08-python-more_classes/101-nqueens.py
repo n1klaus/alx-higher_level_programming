@@ -3,6 +3,8 @@
 
 
 from sys import argv, exit
+
+
 class Queens():
     """ Class definition for solving an N queens puzzle on
     a NxN chessboard
@@ -70,6 +72,7 @@ class Queens():
     def print_row(self):
         """ Method to print a permuatation for the chessboard of given size """
         print("{}".format(self.rows()))
+
 
 if __name__ == "__main__":
     q = Queens()
