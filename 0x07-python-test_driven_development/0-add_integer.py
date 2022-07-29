@@ -13,8 +13,8 @@ def add_integer(a, b=98):
         int: the result of the addition
 
     """
-    if isinstance(a, (int, float)):
-        if isinstance(b, (int, float)):
+    if isinstance(a, int) or isinstance(a, float):
+        if isinstance(b, int) or isinstance(b, float):
             sum = int(a) + int(b)
         else:
             raise TypeError("b must be an integer")
