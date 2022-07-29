@@ -26,13 +26,17 @@ to 98 if only one arguments is given.
 ::
 	>>> add_integer(2)
 	100
+	>>> add_integer(0)
+	98
 
-It also works with floating-point values since argument values
-are casted into integers during the operation
+It also works with floating-point values and negative values
+since argument values are casted into integers during the operation
 
 ::
 	>>> add_integer(100.3, -2)
 	98
+	>>> add_integer(-100, -2)
+	-102
 	>>> add_integer(1.9999999, 99.999)
 	100
 
@@ -54,3 +58,14 @@ the custom TypeError Exception message.
 	>>> add_integer(None)
 	Traceback (most recent call last):
 	TypeError: a must be an integer
+
+No Arguments
+===========
+Providing no arguments for the first argument @a prints
+a TypeError message as an integer for the first positional argument
+is required for printing the result of the addition
+
+::
+	>>> add_integer()
+	Traceback (most recent call last):
+	TypeError: add_integer() missing 1 required positional argument: 'a'
