@@ -21,7 +21,7 @@ For numbers, that value is equivalent to using the ``+`` operator.
 
 Since it only has one positional argument required
 which is the first parameter, the second parameter value defaults
-to the supplied value if only one arguments is given.
+to 98 if only one arguments is given.
 
 ::
 	>>> add_integer(2)
@@ -38,16 +38,19 @@ are casted into integers during the operation
 
 Non-Numbers
 ===========
-Because the ``+`` operator is also defined on data types other than numbers and we are only working with integer numbers and floating point numbers
-a TypeError Exception is raised for types string, list, dictionary, or a tuple therefore printing the custom TypeError Exception message.
+Because the ``+`` operator is also defined on data types other 
+than numbers and we are only working with integer numbers and 
+floating point numbers, a TypeError Exception is raised for 
+types string, list, dictionary, or a tuple therefore printing 
+the custom TypeError Exception message.
 
 ::
-	>>> add_integer(4, "School") # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
+	>>> add_integer(4, "School")
 	Traceback (most recent call last):
 	TypeError: b must be an integer
-	>>> add_integer("School", 4) # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
+	>>> add_integer("School", 4)
 	Traceback (most recent call last):
 	TypeError: a must be an integer
-	>>> add_integer(None) # doctest: +REPORT_NDIFF, +NORMALIZE_WHITESPACE
+	>>> add_integer(None)
 	Traceback (most recent call last):
 	TypeError: a must be an integer
