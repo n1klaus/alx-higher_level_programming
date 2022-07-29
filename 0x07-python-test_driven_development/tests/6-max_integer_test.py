@@ -45,12 +45,5 @@ class TestMaxInteger(unittest.TestCase):
                 self.assertLess(list[index], list[index + 1])
 
 
-def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(TestMaxInteger('6-max_integer'))
-    return suite
-
-
 if __name__ == '__main__':
-    runner = unittest.TestRunner()
-    runner.run(suite())
+    unittest.main()
