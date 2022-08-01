@@ -3,7 +3,7 @@
 
 
 def is_kind_of_class(obj, a_class):
-    """ Function to confirm if an object is an instance of a class
+    """ Function to confirm if an object is a subclass of a class
 
     Args:
         obj: a python object
