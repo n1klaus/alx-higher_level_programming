@@ -15,18 +15,20 @@ Numbers
 ::
 	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 	>>> bg = BaseGeometry()
-	>>> bg.integer_validator("my_int", 12)
+    >>> bg.integer_validator("my_int", 12)
+    12
     >>> bg.integer_validator("width", 89)
+    89
 
 Since it only has two required positional arguments an Exception
 is raised if only one argument is provided.
 
 ::
-	>>> bg.integer_validator("width")
+    >>> bg.integer_validator("width")
     Traceback (most recent call last):
-	TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
-	>>> bg.integer_validator(89)
-	Traceback (most recent call last):
+    TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+    >>> bg.integer_validator(89)
+    Traceback (most recent call last):
     TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
 
 Providing a floating-point value for the second argument 
@@ -34,8 +36,8 @@ Providing a floating-point value for the second argument
 only an integer is required during the operation
 
 ::
-	>>> bg.integer_validator("width", 89.999999)
-	Traceback (most recent call last):
+    >>> bg.integer_validator("width", 89.999999)
+    Traceback (most recent call last):
     TypeError: width must be an integer
 
 Providing a negative number for the second argument 
@@ -43,9 +45,9 @@ will raise a custom ValueError Exception
 as a positive number greater than zero is required for the operation
 
 ::
-	>>> bg.integer_validator("width", -89)
+    >>> bg.integer_validator("width", -89)
     Traceback (most recent call last):
-	ValueError: width must be greater than 0
+    ValueError: width must be greater than 0
 
 Non-Numbers
 ===========
@@ -54,7 +56,7 @@ argument raises a custom TypeError Exception message as an integer
 number is required for the operation.
 
 ::
-	>>> bg.integer_validator("width", "89")
+    >>> bg.integer_validator("width", "89")
     Traceback (most recent call last):
     TypeError: width must be an integer
     >>> bg.integer_validator("measurements", (89, 90))
