@@ -16,3 +16,8 @@ class MyList(list):
     def print_sorted(self):
         """ Function to print a list in a sorted manner """
         print("{}".format(sorted(self)))
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testfile("tests/1-my_list.txt")
