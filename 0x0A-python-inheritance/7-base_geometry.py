@@ -20,10 +20,13 @@ class BaseGeometry:
             name (str): string of characters
             value: integer number
 
+        Returns:
+            int: the validated value
+
         """
         if value.__class__ is int:
             if value > 0:
-                pass
+                return value
             else:
                 raise ValueError("{} must be greater than 0".format(name))
         else:
