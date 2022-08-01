@@ -1,0 +1,77 @@
+# 7-base_geometry.txt
+
+===============================
+ How to Use 7-base_geometry.py
+===============================
+
+This library is very simple, since it has two public instance methods called
+``integer_validator(name, value)`` and ``area()`` in the class ``BaseGeometry``.
+
+Numbers
+=======
+``integer_validator(name, value)`` checks whether a value
+(the second argument provided) is a valid integer number.
+
+::
+	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("my_int", 12)
+    >>> bg.integer_validator("width", 89)
+
+Since it only has two required positional arguments an Exception
+is raised if only one argument is provided.
+
+::
+	>>> bg.integer_validator("width")
+    Traceback (most recent call last):
+	TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+	>>> bg.integer_validator(89)
+	Traceback (most recent call last):
+    TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+
+Providing a floating-point value for the second argument 
+(value) will raise a custom TypeError Exception as 
+only an integer is required during the operation
+
+::
+	>>> bg.integer_validator("width", 89.999999)
+	Traceback (most recent call last):
+    TypeError: width must be an integer
+
+Providing a negative number for the second argument 
+will raise a custom ValueError Exception
+as a positive number greater than zero is required for the operation
+
+::
+	>>> bg.integer_validator("width", -89)
+    Traceback (most recent call last):
+	ValueError: width must be greater than 0
+
+Non-Numbers
+===========
+Providing a non integer number for the second required positional
+argument raises a custom TypeError Exception message as an integer
+number is required for the operation.
+
+::
+	>>> bg.integer_validator("width", "89")
+    Traceback (most recent call last):
+    TypeError: width must be an integer
+    >>> bg.integer_validator("measurements", (89, 90))
+    Traceback (most recent call last):
+    TypeError: measurements must be an integer
+    >>> bg.integer_validator("measurements", {"height", 90})
+    Traceback (most recent call last):
+    TypeError: measurements must be an integer
+    >>> bg.integer_validator("measurements", None)
+    Traceback (most recent call last):
+    TypeError: measurements must be an integer
+
+No Arguments
+===========
+Providing no arguments prints a TypeError message as a string for the first positional argument and an integer for the second positional argument are required for the operation
+
+::
+	>>> bg.integer_validator()
+	Traceback (most recent call last):
+	TypeError: BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
