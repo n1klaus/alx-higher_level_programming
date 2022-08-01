@@ -21,7 +21,7 @@ class BaseGeometry:
             value: integer number
 
         """
-        if isinstance(value, int):
+        if value.__class__ is int:
             if value > 0:
                 pass
             else:
