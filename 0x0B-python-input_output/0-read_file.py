@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module to oprate on a text file """
+""" Module to operate on a text file """
 
 
 def read_file(filename=""):
@@ -10,4 +10,6 @@ def read_file(filename=""):
 
     """
     with open(filename, mode='r', encoding='UTF-8') as o_file:
-        print(o_file.read())
+        for line in o_file:
+            print(line, end="")
+    print()
