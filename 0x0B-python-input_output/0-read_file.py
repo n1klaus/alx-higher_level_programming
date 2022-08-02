@@ -9,7 +9,8 @@ def read_file(filename=""):
         filename: name of the file
 
     """
-    with open(filename, mode='r', encoding='UTF-8') as o_file:
-        for line in o_file:
-            print(line, end="")
-    print()
+    if filename:
+        with open(filename, mode='r', encoding='UTF-8') as o_file:
+            for line in o_file:
+                print("{}".format(line), end="")
+            print("".format())
