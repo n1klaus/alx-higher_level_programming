@@ -49,8 +49,6 @@ class Student:
         Args:
             json (dict): JSON string
 
-        Returns:
-            a dictionary description
-
         """
-        self.__dict__ = json.copy()
+        for key, value in json.items():
+            setattr(self, key, value)
