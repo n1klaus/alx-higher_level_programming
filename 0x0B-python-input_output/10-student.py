@@ -38,7 +38,7 @@ class Student:
         if attrs and isinstance(attrs, list):
             dic = {}
             for item in attrs:
-                if isinstance(item, str):
-                    dic.update({item: self.__dict__.get(item)})
+                if isinstance(item, str) and hasattr(self, item):
+                    dic.update({item: getattr(self, item)})
             return dic
         return self.__dict__
