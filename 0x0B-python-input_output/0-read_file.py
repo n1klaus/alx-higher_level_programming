@@ -11,6 +11,4 @@ def read_file(filename=""):
     """
     if filename:
         with open(str(filename), mode="r", encoding="UTF-8") as o_file:
-            for line in o_file.read():
-                print("{}".format(line), end="")
-        print("".format())
+            print(o_file.read(), end="")
