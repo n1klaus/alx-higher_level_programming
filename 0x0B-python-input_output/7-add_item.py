@@ -16,22 +16,18 @@ def load_add_save(item=None):
     Args:
         item: JSON string item
 
-    Returns:
-        decoded object
-
     """
     my_list = []
     try:
         o_load = load_from_json_file("add_item.json")
         if o_load:
             my_list.extend(o_load)
-    except Exception as e:
+    except FileNotFoundError as fe:
         pass
 
     if item:
         for i in item.split():
             my_list.append(i)
-
     try:
         save_to_json_file(my_list, "add_item.json")
     except Exception as e:
