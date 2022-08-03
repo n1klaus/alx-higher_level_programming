@@ -29,15 +29,16 @@ class Student:
         for JSON serialization
 
         Args:
-            attrs (list): a list of attributes to select from
+            attrs (list, optional): a list of attributes to select from
 
         Returns:
             a dictionary description
 
         """
-        if attrs:
+        if attrs and isinstance(attrs, list):
             dic = {}
             for item in attrs:
-                dic.update({item: self.__dict__.get(item)})
+                if isinstance(item, str):
+                    dic.update({item: self.__dict__.get(item)})
             return dic
         return self.__dict__
