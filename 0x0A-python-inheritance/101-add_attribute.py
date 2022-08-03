@@ -11,7 +11,7 @@ def add_attribute(obj, name=None, value=None):
         value: value of the attribute to be saved in object
 
     """
-    if obj.__class__ in (tuple, str):
+    if not hasattr(obj, "__dict__"):
         raise TypeError("can't add new attribute")
     else:
-        obj.__setattr__(name, value)
+        setattr(obj, name, value)
