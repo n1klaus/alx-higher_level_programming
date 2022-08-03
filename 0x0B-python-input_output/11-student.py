@@ -53,5 +53,4 @@ class Student:
             a dictionary description
 
         """
-        self.__dict__.clear()
         self.__dict__ = json.copy()
