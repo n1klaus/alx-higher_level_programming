@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Module to represent a pascal's triangle """
 
 
