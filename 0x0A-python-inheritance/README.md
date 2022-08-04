@@ -12,10 +12,10 @@
 `5-base_geometry.py` - empty `class BaseGeometry`
 
 `6-base_geometry.py` - `class BaseGeometry` (based on `5-base_geometry.py`)
-> Public instance method: `def area(self):` that raises an Exception with the message ***area() is not implemented***
+> Public instance method: `def area(self):` that raises an Exception with the message `area() is not implemented`
 
-`7-base_geometry.py` - `class BaseGeometry` (based on `6-base_geometry.py`)
-    > Public instance method: `def area(self):` that raises an Exception with the message ***area() is not implemented***\
+`7-base_geometry.py` - `class BaseGeometry` (based on `6-base_geometry.py`)\
+    > Public instance method: `def area(self):` that raises an Exception with the message `area() is not implemented`\
     > Public instance method: `def integer_validator(self, name, value):` that validates value\
 > tests/7-base_geometry.txt - doctest testfile for `7-base_geometry.py`
 
@@ -25,7 +25,7 @@
 `9-rectangle.py` - `class Rectangle` that inherits from BaseGeometry (`8-base_geometry.py`)
 > Instantiation with `width` and `height`: `def __init__(self, width, height):`\
 > the `area()` method must be implemented\
-> `print()` should print, and `str()` should return, the following rectangle description: ***[Rectangle] <width><height>***
+> `print()` should print, and `str()` should return, the following rectangle description: `[Rectangle]<width><height>`
 
 `10-square.py` - `class Square` that inherits from Rectangle (`9-rectangle.py`)
 > Instantiation with size: `def __init__(self, size):`\
@@ -34,7 +34,7 @@
 `11-square.py` - `class Square` that inherits from Rectangle (`10-square.py`)
 > Instantiation with size: `def __init__(self, size):`\
 > the `area()` method must be implemented\
-> `print()` should print, and `str()` should return, the square description: ***[Square] <width>/<height>***
+> `print()` should print, and `str()` should return, the square description: `[Square] <width>/<height>`
 
 `100-my_int.py` -  `class MyInt` that inherits from `int`
 > MyInt has `==` and `!=` operators inverted
