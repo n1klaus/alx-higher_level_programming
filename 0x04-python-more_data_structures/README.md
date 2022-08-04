@@ -10,7 +10,7 @@
 `9-multiply_by_2.py` - returns a new dictionary with all values multiplied by 2\
 `10-best_score.py` - returns a key with the biggest integer value\
 `11-multiply_list_map.py` - returns a list with all values multiplied by a number without using any loops\
-`12-roman_to_int.py` - converts a Roman numeral to an integer\
+`12-roman_to_int.py` - **Technical Interview Test** converts a Roman numeral to an integer\
 `100-weight_average.py` - returns the weighted average of all integers tuple (<score>, <weight>)\
 `101-square_matrix_map.py` - computes the square value of all integers of a matrix using map\
 `102-complex_delete.py` - deletes keys with a specific value in a dictionary\

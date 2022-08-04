@@ -3,24 +3,49 @@ def roman_to_int(roman_string):
     """Function to convert a Roman numeral to an integer
 
     Args:
-        roman_string: a string of roman characters
+        roman_string (str): a string of roman characters
 
     Returns:
-        integer value of roman string
+        int: integer value of roman string
+
     """
     val = 0
     romans = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-    if type(roman_string) is str and roman_string is not None:
-        for char in range(len(roman_string)):
-            for r in list(romans.items()):
-                if roman_string[char] is r[0]:
-                    if roman_string[char] == "I" and \
-                            char < len(roman_string) - 1:
-                        if roman_string[char + 1] == "V":
-                            val += 4
-                            return int(val)
-                        elif roman_string[char + 1] == "X":
-                            val += 9
-                            return int(val)
-                    val += r[1]
+    if len(roman_string) > 0 and isinstance(roman_string, str):
+        for index in range(len(roman_string)):
+            for k, v in romans.items():
+                if roman_string[index] == k:
+                    if index != len(roman_string) - 1:
+                        if k == "C":
+                            if roman_string[index + 1] == "M":
+                                val += 900
+                                index += 1
+                                break
+                            elif roman_string[index + 1] == "D":
+                                val += 400
+                                index += 1
+                                break
+                        elif k == "X":
+                            if roman_string[index + 1] == "C":
+                                val += 90
+                                index += 1
+                                break
+                            elif roman_string[index + 1] == "L":
+                                val += 40
+                                index += 1
+                                break
+                        elif k == "I":
+                            if roman_string[index + 1] == "X":
+                                val += 9
+                                index += 1
+                                break
+                            elif roman_string[index + 1] == "V":
+                                val += 4
+                                index += 1
+                                break
+                        val += v
+                        break
+                    else:
+                        val += v
+                        break
     return int(val)
