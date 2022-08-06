@@ -57,3 +57,35 @@ class Square(Rectangle):
                                                    self._Rectangle__y,
                                                    self._Rectangle__width)
         return my_string
+
+    def update(self, *args, **kwargs):
+        """ Method to assign from positional and key/value elements
+            in argument list to each instance attributes
+
+        """
+        if args or kwargs:
+            assert(all(isinstance(arg, int) for arg in args))
+            assert(all(isinstance(kwarg, int) for kwarg in kwargs.values()))
+            for index in range(max(len(args), len(kwargs))):
+                if index == 0:
+                    if index < len(args):
+                        self.id = args[index]
+                    elif kwargs.get("id"):
+                        self.id = kwargs.get("id")
+                if index == 1:
+                    if index < len(args):
+                        self._Rectangle__width = args[index]
+                        self._Rectangle__height = args[index]
+                    elif kwargs.get("size"):
+                        self._Rectangle__width = kwargs.get("size")
+                        self._Rectangle__height = kwargs.get("size")
+                if index == 2:
+                    if index < len(args):
+                        self._Rectangle__x = args[index]
+                    elif kwargs.get("x"):
+                        self._Rectangle__x = kwargs.get("x")
+                if index == 3:
+                    if index < len(args):
+                        self._Rectangle__y = args[index]
+                    elif kwargs.get("y"):
+                        self._Rectangle__y = kwargs.get("y")
