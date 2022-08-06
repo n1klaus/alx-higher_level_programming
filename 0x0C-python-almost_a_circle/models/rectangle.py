@@ -139,7 +139,9 @@ class Rectangle(Base):
 
     def display(self):
         """ Method to print rectangle instance in stdout using # characters
-            by taking care of x and y coordiates positions """
+            by using x and y coordiates as offsets
+
+        """
         h_spaced = False
         w_spaced = False
         for h in range(self.__height):
@@ -173,3 +175,21 @@ class Rectangle(Base):
                                                       self.__width,
                                                       self.__height)
         return my_string
+
+    def update(self, *args):
+        """ Method to assign from positional elements in argument list
+            to each instance attributes
+
+        """
+        if args:
+            for index in range(len(args)):
+                if index == 0:
+                    self.id = args[0]
+                if index == 1:
+                    self.__width = args[1]
+                if index == 2:
+                    self.__height = args[2]
+                if index == 3:
+                    self.__x = args[3]
+                if index == 4:
+                    self.__y = args[4]
