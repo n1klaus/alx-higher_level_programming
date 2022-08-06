@@ -136,3 +136,12 @@ class Rectangle(Base):
 
         """
         return (self.__width * self.__height)
+
+    def display(self):
+        """ Method to print rectangle instance in stdout using # characters """
+        for h in range(self.__height):
+            for w in range(self.__width):
+                if w == self.__width - 1:
+                    print("#".format())
+                else:
+                    print("#".format(), end="")
