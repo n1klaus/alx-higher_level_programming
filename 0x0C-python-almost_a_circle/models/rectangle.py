@@ -210,3 +210,11 @@ class Rectangle(Base):
                         self.__y = args[index]
                     elif kwargs.get("y"):
                         self.__y = kwargs.get("y")
+
+    def to_dictionary(self):
+        """ Returns the dictionary representation of a Rectangle instance """
+        d = dict()
+        for key, value in self.__dict__.items():
+            split_string = list(key.split("_"))
+            d[split_string[-1]] = value
+        return d
