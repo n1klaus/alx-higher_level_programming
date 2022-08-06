@@ -176,20 +176,37 @@ class Rectangle(Base):
                                                       self.__height)
         return my_string
 
-    def update(self, *args):
-        """ Method to assign from positional elements in argument list
-            to each instance attributes
+    def update(self, *args, **kwargs):
+        """ Method to assign from positional and key/value elements
+            in argument list to each instance attributes
 
         """
-        if args:
-            for index in range(len(args)):
+        if args or kwargs:
+            assert(all(isinstance(arg, int) for arg in args))
+            assert(all(isinstance(kwarg, int) for kwarg in kwargs.values()))
+            for index in range(max(len(args), len(kwargs))):
                 if index == 0:
-                    self.id = args[0]
+                    if index < len(args):
+                        self.id = args[index]
+                    elif kwargs.get("id"):
+                        self.id = kwargs.get("id")
                 if index == 1:
-                    self.__width = args[1]
+                    if index < len(args):
+                        self.__width = args[index]
+                    elif kwargs.get("width"):
+                        self.__width = kwargs.get("width")
                 if index == 2:
-                    self.__height = args[2]
+                    if index < len(args):
+                        self.__height = args[index]
+                    elif kwargs.get("height"):
+                        self.__height = kwargs.get("height")
                 if index == 3:
-                    self.__x = args[3]
+                    if index < len(args):
+                        self.__x = args[index]
+                    elif kwargs.get("x"):
+                        self.__x = kwargs.get("x")
                 if index == 4:
-                    self.__y = args[4]
+                    if index < len(args):
+                        self.__y = args[index]
+                    elif kwargs.get("y"):
+                        self.__y = kwargs.get("y")
