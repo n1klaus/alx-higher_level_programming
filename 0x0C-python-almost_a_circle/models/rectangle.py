@@ -145,3 +145,19 @@ class Rectangle(Base):
                     print("#".format())
                 else:
                     print("#".format(), end="")
+
+    def __str__(self):
+        """ Method to override printable string representation of the instance
+
+        Returns:
+            str: printable string representation of instance
+
+        """
+        my_string = str()
+        my_string += "[{}] ({}) {}/{} - {}/{}".format(self.__class__.__name__,
+                                                      self.id,
+                                                      self.__x,
+                                                      self.__y,
+                                                      self.__width,
+                                                      self.__height)
+        return my_string
