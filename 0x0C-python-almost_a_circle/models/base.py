@@ -6,16 +6,17 @@ class Base:
     """ Class definition for Base objects
 
     Attributes:
-        __nb_objects (int) : number of objects initialized by class
+        __nb_objects (int) : number of instances initialized by class
+        id (int): id of the instance
 
     """
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """ Constructor to instantiate new class objects
+        """ Constructor to instantiate new class instances
 
         Args:
-            id (int, optional): id of the class
+            id (int, optional): id of the instance
 
         """
         if id is not None:
