@@ -138,13 +138,25 @@ class Rectangle(Base):
         return (self.__width * self.__height)
 
     def display(self):
-        """ Method to print rectangle instance in stdout using # characters """
+        """ Method to print rectangle instance in stdout using # characters
+            by taking care of x and y coordiates positions """
+        h_spaced = False
+        w_spaced = False
         for h in range(self.__height):
+            if h < self.__y and not h_spaced:
+                for h_space in range(self.__y):
+                    print(" ".format(h_space))
+                h_spaced = True
             for w in range(self.__width):
+                if w < self.__x and not w_spaced:
+                    for w_space in range(self.__x):
+                        print(" ".format(w_space), end="")
+                    w_spaced = True
                 if w == self.__width - 1:
                     print("#".format())
                 else:
                     print("#".format(), end="")
+            w_spaced = False
 
     def __str__(self):
         """ Method to override printable string representation of the instance
