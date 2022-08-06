@@ -89,3 +89,14 @@ class Square(Rectangle):
                         self._Rectangle__y = args[index]
                     elif kwargs.get("y"):
                         self._Rectangle__y = kwargs.get("y")
+
+    def to_dictionary(self):
+        """ Returns the dictionary representation of a Square instance """
+        d = dict()
+        for key, value in self.__dict__.items():
+            split_string = list(key.split("_"))
+            if split_string[-1] == "width" or split_string[-1] == "height":
+                d["size"] = value
+            else:
+                d[split_string[-1]] = value
+        return d
