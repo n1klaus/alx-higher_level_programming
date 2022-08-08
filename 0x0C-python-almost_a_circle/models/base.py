@@ -57,11 +57,7 @@ class Base:
         encoded_string = str()
         with open(my_filename, mode="w", encoding="UTF-8") as a_file:
             if list_objs is not None:
-                encoded_string += "["
                 for item in list_objs:
-                    encoded_string += cls.to_json_string(item.__dict__)
-                    if item is not list_objs[-1]:
-                        encoded_string += ", "
-                encoded_string += "]"
-                my_list.append(encoded_string)
-            a_file.writelines(my_list)
+                    my_list.append(item.__dict__)
+                encoded_string = cls.to_json_string(my_list)
+            a_file.write(encoded_string)
