@@ -61,3 +61,18 @@ class Base:
                     my_list.append(item.__dict__)
                 encoded_string = cls.to_json_string(my_list)
             a_file.write(encoded_string)
+
+    @staticmethod
+    def from_json_string(json_string):
+        """ Returns a list from a JSON string representation
+
+        Args:
+            json_string: a JSON string of list of dictionaries
+
+        Returns:
+            list: a list of the JSON string
+
+        """
+        if json_string is None or not json_string:
+            return (list())
+        return list(json.loads(json_string))
