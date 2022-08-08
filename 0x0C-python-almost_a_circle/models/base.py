@@ -24,6 +24,7 @@ class Base:
         """
         if id is not None:
             assert(isinstance(id, int))
+            assert(id > 0)
             self.id = id
         else:
             Base.__nb_objects += 1
@@ -42,6 +43,7 @@ class Base:
         """
         if list_dictionaries is None or not list_dictionaries:
             return str("[]")
+        assert(isinstance(list_dictionaries, list))
         return json.dumps(list_dictionaries)
 
     @classmethod
@@ -52,6 +54,7 @@ class Base:
             list_objs (list): list of instances of the Base class
 
         """
+        assert(isinstance(list_objs, list))
         my_filename = str(cls.__name__) + ".json"
         my_list = list()
         encoded_string = str()
@@ -88,6 +91,7 @@ class Base:
             A newly created instance with attributes set
 
         """
+        assert(isinstance(dictionary, dict))
         cls_object = cls(1, 1)
         cls_object.update(**dictionary)
         return cls_object

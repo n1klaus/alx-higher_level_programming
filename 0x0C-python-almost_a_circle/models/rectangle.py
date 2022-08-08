@@ -114,7 +114,7 @@ class Rectangle(Base):
         """
         return self.__y
 
-    @x.setter
+    @y.setter
     def y(self, value):
         """ Setter method to modify y coordinate attribute
 

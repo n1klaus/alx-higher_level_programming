@@ -1,0 +1,439 @@
+# base.txt
+
+===============================
+ How to Use base.py
+===============================
+
+The class has several methods of which each has different functionalities
+
+Public Method '__init__(self, id=None)'
+=================================================
+The class takes one optional argument which is an integer number.
+
+For **Positive-Numbers**, that value is passed on to the created instance.
+
+::
+	>>> from models.base import Base
+	>>> b1 = Base(12)
+	>>> print(b1.id)
+    12
+
+For **Negative-Numbers** and **Floats**, an AssertionError is raised as a positive integer number is required
+
+::
+	>>> b1 = Base(-12)
+	Traceback (most recent call last):
+    AssertionError
+	>>> b1 = Base(12.99999)
+	Traceback (most recent call last):
+    AssertionError
+
+For **Non-numbers** AssertionError Exception is raised as only an integer
+number is accepted for the argument
+
+::
+	>>> b1 = Base("12")
+    Traceback (most recent call last):
+	AssertionError
+	>>> b1 = Base([12])
+    Traceback (most recent call last):
+	AssertionError
+	>>> b1 = Base({"id": 12})
+    Traceback (most recent call last):
+	AssertionError
+	>>> b1 = Base((12,5))
+	Traceback (most recent call last):
+    AssertionError
+
+If **No arguments** are used the value defaults to the __nb_objects
+class attribute value
+
+::
+	>>> b1 = Base()
+	>>> print(b1.id)
+    1
+    >>> b1 = Base(None)
+	>>> print(b1.id)
+    2
+
+If **Undefined arguments** are used an Exception is raised
+
+::
+	>>> b1 = Base(12, 20)
+	Traceback (most recent call last):
+    TypeError: Base.__init__() takes from 1 to 2 positional arguments but 3 were given
+	>>> b1 = Base(float('Inf'))
+	Traceback (most recent call last):
+    AssertionError
+	>>> b1 = Base(float('-Inf'))
+	Traceback (most recent call last):
+    AssertionError
+
+
+
+Static Method 'to_json_string(list_dictionaries)'
+=================================================
+The method takes one positional argument which is a list of dictionaries
+and returns a JSON string represenation of the list.
+
+For **List of dictionaries**, the input is parsed out into a JSON string
+
+::
+	>>> from models.base import Base
+	>>> b1 = Base(12)
+    >>> list_input = \
+    ... [
+    ...     {'id': 89, 'width': 10, 'height': 4},
+    ...     {'id': 7, 'width': 1, 'height': 7}
+    ... ]
+    >>> output = b1.to_json_string(list_input)
+    >>> print("{}".format(output))
+    [{"id": 89, "width": 10, "height": 4}, {"id": 7, "width": 1, "height": 7}]
+
+For **Numbers**, an AssertionError is raised as a list object is required
+
+::
+    >>> output = b1.to_json_string(4)
+    Traceback (most recent call last):
+    AssertionError
+    >>> output = b1.to_json_string(-4)
+    Traceback (most recent call last):
+    AssertionError
+    >>> output = b1.to_json_string(4.99999)
+    Traceback (most recent call last):
+    AssertionError
+
+For other **Non-list** python objects like string, tuple,
+dictionary: an Assertion Error is raised
+
+::
+	>>> output = b1.to_json_string("4")
+	Traceback (most recent call last):
+    AssertionError
+	>>> output = b1.to_json_string({"id":4})
+	Traceback (most recent call last):
+    AssertionError
+	>>> output = b1.to_json_string(("4", 4))
+	Traceback (most recent call last):
+    AssertionError
+    >>> output = b1.to_json_string(["4", "apples", 4, "Empty"])
+    Traceback (most recent call last):
+    AssertionError
+
+If **No arguments** are provided a TypeError Exception is raised
+
+::
+	>>> output = b1.to_json_string()
+    Traceback (most recent call last):
+	TypeError: Base.to_json_string() missing 1 required positional argument: 'list_dictionaries'
+
+If **Undefined arguments** are used an Exception is raised
+
+::
+    >>> output = b1.to_json_string('apples', 'oranges')
+    Traceback (most recent call last):
+    TypeError: Base.to_json_string() takes 1 positional argument but 2 were given
+    >>> output = b1.to_json_string(None)
+    Traceback (most recent call last):
+    AssertionError
+	>>> output = b1.to_json_string(float('Inf'))
+    Traceback (most recent call last):
+    AssertionError
+	>>> output = b1.to_json_string(float('-Inf'))
+    Traceback (most recent call last):
+    AssertionError
+
+
+
+Class Method 'save_to_file(cls, list_objs)'
+=================================================
+The method takes one positional argument which is a list of python objects.
+
+For **List**, the id of the class objects are successfully saved into a file
+
+::
+	>>> from models.base import Base
+	>>> b1 = Base(12)
+	>>> b2 = Base(24)
+    >>> b3 = Base(36)
+    >>> list_input = [b2, b3]
+    >>> b1.save_to_file(list_input)
+
+For **Numbers**, an AssertionError is raised as a list object is required
+
+::
+    >>> b1.save_to_file(4)
+    Traceback (most recent call last):
+    AssertionError
+    >>> b1.save_to_file(-4)
+    Traceback (most recent call last):
+    AssertionError
+    >>> b1.save_to_file(4.99999)
+    Traceback (most recent call last):
+    AssertionError
+
+For other **Non-list** or list of **Non-class instances** python objects like string, tuple, dictionary: an Exception is raised
+
+::
+	>>> b1.save_to_file("4")
+	Traceback (most recent call last):
+    AssertionError
+	>>> b1.save_to_file({"id":4})
+	Traceback (most recent call last):
+    AssertionError
+	>>> b1.save_to_file(("4", 4))
+	Traceback (most recent call last):
+    AssertionError
+    >>> b1.save_to_file(["4"])
+    Traceback (most recent call last):
+    AttributeError: 'str' object has no attribute '__dict__'. Did you mean: '__dir__'?
+    >>> b1.save_to_file([4])
+    Traceback (most recent call last):
+    AttributeError: 'int' object has no attribute '__dict__'. Did you mean: '__dir__'?
+	>>> b1.save_to_file([("4", 4)])
+	Traceback (most recent call last):
+    AttributeError: 'tuple' object has no attribute '__dict__'. Did you mean: '__dir__'?
+	>>> b1.save_to_file([{"id":4}])
+	Traceback (most recent call last):
+    AttributeError: 'dict' object has no attribute '__dict__'. Did you mean: '__dir__'?'
+	>>> b1.save_to_file([None])
+	Traceback (most recent call last):
+    AttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?
+
+If **No arguments** are provided a TypeError Exception is raised
+
+::
+	>>> b1.save_to_file()
+    Traceback (most recent call last):
+	TypeError: Base.save_to_file() missing 1 required positional argument: 'list_objs'
+
+If **Undefined arguments** are used an Exception is raised
+
+::
+    >>> b1.save_to_file([b2], [b3])
+    Traceback (most recent call last):
+    TypeError: Base.save_to_file() takes 2 positional arguments but 3 were given
+    >>> b1.save_to_file(None)
+    Traceback (most recent call last):
+    AssertionError
+	>>> b1.save_to_file(float('Inf'))
+    Traceback (most recent call last):
+    AssertionError
+	>>> b1.save_to_file(float('-Inf'))
+    Traceback (most recent call last):
+    AssertionError
+
+
+Static Method 'from_json_string(json_string)'
+=================================================
+The method takes one positional argument which is a JSON string
+and returns a list of the JSON decoded string.
+
+For **JSON Strings**, the input is parsed out into a list
+
+::
+	>>> from models.base import Base
+	>>> b1 = Base(12)
+    >>> list_output = b1.from_json_string('[{"id": 4}]')
+    >>> print("{}".format(list_output))
+    [{'id': 4}]
+
+For **NoneType** objects, an empty list is returned
+
+::
+    >>> list_output = b1.from_json_string(None)
+    >>> print("{}".format(list_output))
+    []
+
+For **Numbers**, a TypeError is raised as a str object is required
+
+::
+    >>> list_output = b1.from_json_string(4)
+    Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not int
+    >>> list_output = b1.from_json_string(-4)
+    Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not int
+    >>> list_output = b1.from_json_string(4.99999)
+    Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not float
+
+For other **Non-JSON-String** python objects like string, list, tuple,
+dictionary: a TypeError Error is raised
+
+::
+    >>> list_output = b1.from_json_string('id')
+    Traceback (most recent call last):
+    json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+	>>> list_output = b1.from_json_string({"id":4})
+	Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not dict
+	>>> list_output = b1.from_json_string(("4", 4))
+	Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not tuple
+    >>> list_output = b1.from_json_string(["4", "apples", 4, "Empty"])
+    Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not list
+
+If **No arguments** are provided a TypeError Exception is raised
+
+::
+	>>> list_output = b1.from_json_string()
+    Traceback (most recent call last):
+	TypeError: Base.from_json_string() missing 1 required positional argument: 'json_string'
+
+If **Undefined arguments** are used an Exception is raised
+
+::
+    >>> list_output = b1.from_json_string('[{"id": 4}]', '[{"state": "On"}]')
+    Traceback (most recent call last):
+    TypeError: Base.from_json_string() takes 1 positional argument but 2 were given
+	>>> list_output = b1.from_json_string(float('Inf'))
+    Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not float
+	>>> list_output = b1.from_json_string(float('-Inf'))
+    Traceback (most recent call last):
+    TypeError: the JSON object must be str, bytes or bytearray, not float
+
+
+
+Class Method 'create(cls, **dictionary)'
+=================================================
+The method takes one positional argument which is a key/value dictionary of attributes and returns the newly created instance from the attributes.
+
+For **Dictionaries**, a new instance is created and returned
+
+::
+	>>> from models.base import Base
+	>>> b1 = Base(12)
+    >>> d1 = {"id" : 48}
+    >>> new_instance = b1.create(**d1)
+    >>> print("{}".format(new_instance))
+    <models.base.Base object at ... >
+
+For **Numbers**, a TypeError is raised as a key/value dictionary object is required as a key/value arguments
+
+::
+    >>> d1 = 4
+    >>> new_instance = b1.create(**d1)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not int
+    >>> d1 = -4
+    >>> new_instance = b1.create(**d1)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not int
+    >>> d1 = -4.999999
+    >>> new_instance = b1.create(**d1)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not float
+
+For other **Non-dictionary** python objects like string, tuple, list: a TypeError Exception is raised as a key/value dictionary object is required as a key/value arguments
+
+::
+    >>> d1 = "id"
+	>>> new_instance = b1.create(**d1)
+	Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not str
+    >>> d1 = ["id", 4]
+	>>> new_instance = b1.create(**d1)
+	Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not list
+    >>> d1 = ("4", 4)
+	>>> new_instance = b1.create(**d1)
+	Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not tuple
+
+If **No arguments** are provided a TypeError Exception is raised
+
+::
+	>>> new_instance = b1.create()
+    Traceback (most recent call last):
+	TypeError: Base.__init__() takes from 1 to 2 positional arguments but 3 were given
+
+If **Undefined arguments** are used an Exception is raised
+
+::
+    >>> d1 = {"id", 4}
+    >>> d2 = {"id", 44}
+    >>> new_instance = b1.create(**d1, **d2)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not set
+    >>> d1 = None
+    >>> new_instance = b1.create(**d1)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not NoneType
+    >>> d1 = float('Inf')
+	>>> new_instance = b1.create(**d1)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not float
+    >>> d1 = float('-Inf')
+	>>> new_instance = b1.create(**d1)
+    Traceback (most recent call last):
+    TypeError: models.base.Base.create() argument after ** must be a mapping, not float
+
+
+
+Class Method 'load_from_file(cls)'
+=================================================
+The method takes no arguments and loads a list of instances templates from a JSON file and returns a list of the newly created instances.
+
+With **No arguments** the method returns the list of created instances
+
+::
+	>>> from models.base import Base
+	>>> b1 = Base(12)
+    >>> b2 = Base(24)
+    >>> b3 = Base(36)
+    >>> list_save = [b2, b3]
+    # Saves to Base.json
+    >>> b1.save_to_file(list_save)
+    >>> list_output = b1.load_from_file()
+    >>> print("{}".format(list_output))
+    [{"id": 24}, {"id": 36}]
+
+For **Numbers**, a TypeError Exception is raised
+
+::
+    >>> list_output = b1.load_from_file(4)
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+    >>> list_output = b1.load_from_file(-4)
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+    >>> list_output = b1.load_from_file(4.99999)
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+
+For other python objects like string, list, tuple,
+dictionary: a TypeError Error is raised
+
+::
+    >>> list_output = b1.load_from_file('id')
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+	>>> list_output = b1.load_from_file({"id":4})
+	Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+	>>> list_output = b1.load_from_file(("4", 4))
+	Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+    >>> list_output = b1.load_from_file(["4", "apples", 4, "Empty"])
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+
+If **Undefined arguments** are used a TypeError Exception is raised
+
+::
+    >>> list_output = b1.load_from_file('[{"id": 4}]', '[{"state": "On"}]')
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+    >>> list_output = b1.load_from_file(None)
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+	>>> list_output = b1.load_from_file(float('Inf'))
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+	>>> list_output = b1.load_from_file(float('-Inf'))
+    Traceback (most recent call last):
+    TypeError: Base.load_from_file() takes 1 positional argument but 2 were given
+
