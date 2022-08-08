@@ -91,3 +91,28 @@ class Base:
         cls_object = cls(1, 1)
         cls_object.update(**dictionary)
         return cls_object
+
+    @classmethod
+    def load_from_file(cls):
+        """ Loads a list of instance templates from a JSON file
+            and creates an instance from the template
+
+        Returns:
+            list: a list of the created instances
+
+        """
+        fileName = cls.__name__ + ".json"
+        json_list = list()
+        instance_list = list()
+        file_objs = str()
+        dict_attr = dict()
+        with open(fileName, mode="r", encoding="UTF-8") as o_file:
+            file_objs = o_file.read()
+        json_list.extend(cls.from_json_string(file_objs))
+        for obj_attr in json_list:
+            fake_obj = cls(1, 1)
+            fake_obj.__dict__.clear()
+            fake_obj.__dict__ = obj_attr
+            dict_attr = fake_obj.to_dictionary()
+            instance_list.append(cls.create(**dict_attr))
+        return instance_list
