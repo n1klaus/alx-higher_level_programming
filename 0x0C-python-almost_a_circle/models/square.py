@@ -36,6 +36,10 @@ class Square(Rectangle):
         Args:
             value (int): new value for the length of the size of the square
 
+        Raises:
+            TypeError: if it is a Non-Integer values
+            ValueError: if it is a Integer value less than or equal to 0
+
         """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
