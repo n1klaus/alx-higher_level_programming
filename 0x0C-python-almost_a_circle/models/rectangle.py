@@ -8,10 +8,10 @@ class Rectangle(Base):
     """ Class definition for Rectangle objects
 
     Attributes:
-        __width (int): base length of the rectangle
-        __height (int): height of the rectangle
-        __x (int: x coordinate position
-        __y (int): y coordinate position
+        width (int): base length of the rectangle
+        height (int): height of the rectangle
+        x (int: x coordinate position
+        y (int): y coordinate position
         id (int): id of the instance
 
     """
@@ -49,6 +49,10 @@ class Rectangle(Base):
         Args:
             value (int): new value for width
 
+        Raises:
+            TypeError: if it is a Non-Integer values
+            ValueError: if it is a Integer value less than or equal to 0
+
         """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -72,6 +76,10 @@ class Rectangle(Base):
 
         Args:
             value (int): new value for height
+
+        Raises:
+            TypeError: if it is a Non-Integer values
+            ValueError: if it is a Integer value less than or equal to 0
 
         """
         if not isinstance(value, int):
@@ -97,6 +105,10 @@ class Rectangle(Base):
         Args:
             value (int): new value for x
 
+        Raises:
+            TypeError: if it is a Non-Integer values
+            ValueError: if it is a Integer value less than 0
+
         """
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
@@ -120,6 +132,10 @@ class Rectangle(Base):
 
         Args:
             value (int): new value for y
+
+        Raises:
+            TypeError: if it is a Non-Integer values
+            ValueError: if it is a Integer value less than 0
 
         """
         if not isinstance(value, int):
