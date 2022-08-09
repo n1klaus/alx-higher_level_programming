@@ -6,21 +6,42 @@ import json
 from models.base import Base
 
 
-class TestBase_instantiation(unittest.TestCase):
+class TestBase__init__(unittest.TestCase):
     """ Unittests for testing the constructor of the Base class
         public method '__init__(self, id=None)'
 
     """
 
-    def test_no_args(self):
+    def test_None(self):
+        b1 = Base(None)
+        self.assertEqual(b1.id, 1)
+        self.assertIsInstance(b1, Base)
+
+    def test_consecutive_automatic_assignment(self):
+        b1 = Base(12)
+        b2 = Base()
+        b3 = Base()
+        self.assertEqual(b2.id, 2)
+        self.assertEqual(b3.id, 3)
+        self.assertGreater(b1.id, b2.id)
+        self.assertGreater(b3.id, b2.id)
+        self.assertGreater(b1.id, b3.id)
+
+    def test_output_type(self):
         b1 = Base()
         self.assertIsInstance(b1.id, int)
         self.assertIsInstance(b1, Base)
 
-    def test_None(self):
-        b1 = Base(None)
-        self.assertIsInstance(b1.id, int)
+    def test_no_args(self):
+        b1 = Base()
+        self.assertEqual(b1.id, 4)
         self.assertIsInstance(b1, Base)
+
+    def test_single_automatic_assignment(self):
+        b1 = Base(12)
+        b2 = Base()
+        self.assertEqual(b2.id, 6)
+        self.assertGreater(b1.id, b2.id)
 
     def test_positive_integer(self):
         self.assertEqual(12, Base(12).id)
