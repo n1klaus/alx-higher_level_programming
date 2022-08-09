@@ -13,6 +13,11 @@ class TestRectangle__init__(unittest.TestCase):
 
     """
 
+    def test_ID_automatic_assignment(self):
+        r1 = Rectangle(10, 2)
+        r2 = Rectangle(2, 10)
+        self.assertGreater(r2.id, r1.id)
+
     def test_None(self):
         with self.assertRaises(TypeError):
             Rectangle(None, None)
@@ -648,6 +653,12 @@ class TestRectangle_display(unittest.TestCase):
     def test_output_type(self):
         d = self.display()
         self.assertIsNone(d)
+
+    def test_no_x_and_no_y(self):
+        r2 = Rectangle(8, 4)
+        d = r2.display()
+        self.assertIsNone(d)
+        self.assertIsInstance(r2, Rectangle)
 
     def test_no_args(self):
         d = self.display()

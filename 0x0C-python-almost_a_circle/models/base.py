@@ -92,7 +92,7 @@ class Base:
 
         """
         assert(isinstance(dictionary, dict))
-        cls_object = cls(1, 1)
+        cls_object = cls(None, None)
         cls_object.update(**dictionary)
         return cls_object
 
@@ -114,7 +114,7 @@ class Base:
             file_objs = o_file.read()
         json_list.extend(cls.from_json_string(file_objs))
         for obj_attr in json_list:
-            fake_obj = cls(1, 1)
+            fake_obj = cls(None, None)
             fake_obj.__dict__.clear()
             fake_obj.__dict__ = obj_attr
             dict_attr = fake_obj.to_dictionary()
