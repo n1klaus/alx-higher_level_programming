@@ -201,27 +201,27 @@ class Rectangle(Base):
             assert(all(isinstance(arg, int) for arg in args))
             assert(all(isinstance(kwarg, int) for kwarg in kwargs.values()))
             for index in range(max(len(args), len(kwargs))):
-                if index == 0:
+                if index == 0 or "id" in kwargs:
                     if index < len(args):
                         self.id = args[index]
                     elif kwargs.get("id"):
                         self.id = kwargs.get("id")
-                if index == 1:
+                if index == 1 or "width" in kwargs:
                     if index < len(args):
                         self.__width = args[index]
                     elif kwargs.get("width"):
                         self.__width = kwargs.get("width")
-                if index == 2:
+                if index == 2 or "height" in kwargs:
                     if index < len(args):
                         self.__height = args[index]
                     elif kwargs.get("height"):
                         self.__height = kwargs.get("height")
-                if index == 3:
+                if index == 3 or "x" in kwargs:
                     if index < len(args):
                         self.__x = args[index]
                     elif kwargs.get("x"):
                         self.__x = kwargs.get("x")
-                if index == 4:
+                if index == 4  or "y" in kwargs:
                     if index < len(args):
                         self.__y = args[index]
                     elif kwargs.get("y"):
