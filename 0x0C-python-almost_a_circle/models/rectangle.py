@@ -221,7 +221,7 @@ class Rectangle(Base):
                         self.__x = args[index]
                     elif kwargs.get("x"):
                         self.__x = kwargs.get("x")
-                if index == 4  or "y" in kwargs:
+                if index == 4 or "y" in kwargs:
                     if index < len(args):
                         self.__y = args[index]
                     elif kwargs.get("y"):
