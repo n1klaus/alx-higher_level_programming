@@ -163,7 +163,7 @@ class Rectangle(Base):
         for h in range(self.__height):
             if h < self.__y and not h_spaced:
                 for h_space in range(self.__y):
-                    print(" ".format(h_space))
+                    print("".format(h_space))
                 h_spaced = True
             for w in range(self.__width):
                 if w < self.__x and not w_spaced:
