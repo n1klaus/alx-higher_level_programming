@@ -92,8 +92,14 @@ class Base:
 
         """
         assert(isinstance(dictionary, dict))
-        cls_object = cls(None, None)
-        cls_object.update(**dictionary)
+        if cls.__name__ == 'Base':
+            cls_object = cls()
+        elif cls.__name__ == 'Rectangle':
+            cls_object = cls(1, 1)
+            cls_object.update(**dictionary)
+        elif cls.__name__ == 'Square':
+            cls_object = cls(1)
+            cls_object.update(**dictionary)
         return cls_object
 
     @classmethod
@@ -114,9 +120,16 @@ class Base:
             file_objs = o_file.read()
         json_list.extend(cls.from_json_string(file_objs))
         for obj_attr in json_list:
-            fake_obj = cls(None, None)
-            fake_obj.__dict__.clear()
-            fake_obj.__dict__ = obj_attr
-            dict_attr = fake_obj.to_dictionary()
+            if cls.__name__ == 'Base':
+                fake_obj = cls()
+                dict_attr = fake_obj.__dict__
+            else:
+                if cls.__name__ == 'Rectangle':
+                    fake_obj = cls(1, 1)
+                elif cls.__name__ == 'Square':
+                    fake_obj = cls(1)
+                fake_obj.__dict__.clear()
+                fake_obj.__dict__ = obj_attr
+                dict_attr = fake_obj.to_dictionary()
             instance_list.append(cls.create(**dict_attr))
         return instance_list

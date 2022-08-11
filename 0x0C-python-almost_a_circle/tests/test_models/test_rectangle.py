@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ Defines unittests for rectangle.py """
 import unittest
+import json
+import os
 from models.rectangle import Rectangle
 
 
@@ -34,25 +36,65 @@ class TestRectangle__init__(unittest.TestCase):
         with self.assertRaises(ValueError):
             Rectangle(False, False)
 
+    def test_zero_width(self):
+        with self.assertRaises(ValueError):
+            Rectangle(0, 2)
+
+    def test_zero_height(self):
+        with self.assertRaises(ValueError):
+            Rectangle(1, 0)
+
     def test_positive_number(self):
         r1 = Rectangle(4, 4)
         self.assertIsInstance(r1, Rectangle)
 
-    def test_negative_number(self):
+    def test_negative_number_width(self):
         with self.assertRaises(ValueError):
-            Rectangle(-4, -4)
+            Rectangle(-1, 2)
+
+    def test_negative_number_height(self):
+        with self.assertRaises(ValueError):
+            Rectangle(1, -2)
+
+    def test_negative_number_x(self):
+        with self.assertRaises(ValueError):
+            Rectangle(1, 2, -3)
+
+    def test_negative_number_y(self):
+        with self.assertRaises(ValueError):
+            Rectangle(1, 2, 3, -4)
+
+    def test_negative_number_id(self):
+        with self.assertRaises(AssertionError):
+            Rectangle(1, 2, 3, 4, -5)
 
     def test_float(self):
         with self.assertRaises(TypeError):
             Rectangle(4.99999, 4.99999)
 
+    def test_str_width(self):
+        with self.assertRaises(TypeError):
+            Rectangle("1", 2)
+
+    def test_str_height(self):
+        with self.assertRaises(TypeError):
+            Rectangle(1, "2")
+
+    def test_str_x(self):
+        with self.assertRaises(TypeError):
+            Rectangle(1, 2, "3")
+
+    def test_str_y(self):
+        with self.assertRaises(TypeError):
+            Rectangle(1, 2, 3, "4")
+
+    def test_str_id(self):
+        with self.assertRaises(AssertionError):
+            Rectangle(1, 2, 3, 4, "5")
+
     def test_complex(self):
         with self.assertRaises(TypeError):
             Rectangle(complex(5), complex(5))
-
-    def test_str(self):
-        with self.assertRaises(TypeError):
-            Rectangle("4", "4")
 
     def test_tuple(self):
         with self.assertRaises(TypeError):
@@ -103,20 +145,20 @@ class TestRectangle__init__(unittest.TestCase):
             Rectangle()
 
     def test_three_args(self):
-        r1 = Rectangle(1, 12, 4)
+        r1 = Rectangle(1, 2, 3)
         self.assertIsInstance(r1, Rectangle)
 
     def test_four_args(self):
-        r1 = Rectangle(1, 12, 4, 5)
+        r1 = Rectangle(1, 2, 3, 4)
         self.assertIsInstance(r1, Rectangle)
 
     def test_five_args(self):
-        r1 = Rectangle(1, 12, 4, 5, 6)
+        r1 = Rectangle(1, 2, 3, 4, 5)
         self.assertIsInstance(r1, Rectangle)
 
     def test_more_than_five_args(self):
         with self.assertRaises(TypeError):
-            Rectangle(1, 12, 4, 5, 6, 7, 8)
+            Rectangle(1, 2, 3, 4, 5, 6, 7)
 
 
 class TestRectangle_width_setter(unittest.TestCase):
@@ -607,35 +649,29 @@ class TestRectangle_area(unittest.TestCase):
 
     """
 
-    @classmethod
-    def setUp(self):
-        """ Create Rectangle instance """
-        r1 = Rectangle(8, 4, 1, 3)
-        self.area = r1.area
-
     def test_output_type(self):
-        a = self.area()
+        a = Rectangle(8, 4, 1, 3).area()
         self.assertIsInstance(a, int)
 
     def test_no_args(self):
-        a = self.area()
+        a = Rectangle(8, 4, 1, 3).area()
         self.assertEqual(a, 32)
 
     def test_with_args(self):
         with self.assertRaises(TypeError):
-            self.area(3, 4)
+            Rectangle(8, 4, 1, 3).area(3, 4)
 
     def test_None(self):
         with self.assertRaises(TypeError):
-            self.area(None)
+            Rectangle(8, 4, 1, 3).area(None)
 
     def test_bool_true(self):
         with self.assertRaises(TypeError):
-            self.area(True)
+            Rectangle(8, 4, 1, 3).area(True)
 
     def test_bool_false(self):
         with self.assertRaises(TypeError):
-            self.area(False)
+            Rectangle(8, 4, 1, 3).area(False)
 
 
 class TestRectangle_display(unittest.TestCase):
@@ -644,41 +680,41 @@ class TestRectangle_display(unittest.TestCase):
 
     """
 
-    @classmethod
-    def setUp(self):
-        """ Create Rectangle instance """
-        r1 = Rectangle(8, 4, 1, 3)
-        self.display = r1.display
-
     def test_output_type(self):
-        d = self.display()
+        d = Rectangle(8, 4, 1, 3).display()
+        self.assertIsNone(d)
+
+    def test_no_x(self):
+        d = Rectangle(8, 4, x=2).display()
+        self.assertIsNone(d)
+
+    def test_no_y(self):
+        d = Rectangle(8, 4, y=4).display()
         self.assertIsNone(d)
 
     def test_no_x_and_no_y(self):
-        r2 = Rectangle(8, 4)
-        d = r2.display()
+        d = Rectangle(8, 4).display()
         self.assertIsNone(d)
-        self.assertIsInstance(r2, Rectangle)
 
     def test_no_args(self):
-        d = self.display()
+        d = Rectangle(8, 4).display()
         self.assertIsNone(d)
 
     def test_with_args(self):
         with self.assertRaises(TypeError):
-            self.display(3, 4)
+            Rectangle(8, 4, 1, 3).display(3, 4)
 
     def test_None(self):
         with self.assertRaises(TypeError):
-            self.display(None)
+            Rectangle(8, 4, 1, 3).display(None)
 
     def test_bool_true(self):
         with self.assertRaises(TypeError):
-            self.display(True)
+            Rectangle(8, 4, 1, 3).display(True)
 
     def test_bool_false(self):
         with self.assertRaises(TypeError):
-            self.display(False)
+            Rectangle(8, 4, 1, 3).display(False)
 
 
 class TestRectangle__str__(unittest.TestCase):
@@ -687,36 +723,30 @@ class TestRectangle__str__(unittest.TestCase):
 
     """
 
-    @classmethod
-    def setUp(self):
-        """ Create Rectangle instance """
-        r1 = Rectangle(8, 4, 1, 3, 55)
-        self.__str__ = r1.__str__
-
     def test_output_type(self):
-        s = self.__str__()
+        s = Rectangle(8, 4, 1, 3, 55).__str__()
         self.assertIsNotNone(s)
         self.assertIsInstance(s, str)
 
     def test_no_args(self):
-        s = self.__str__()
+        s = Rectangle(8, 4, 1, 3, 55).__str__()
         self.assertEqual(s, "[Rectangle] (55) 1/3 - 8/4")
 
     def test_with_args(self):
         with self.assertRaises(TypeError):
-            self.__str__(3, 4)
+            Rectangle(8, 4, 1, 3, 55).__str__(3, 4)
 
     def test_None(self):
         with self.assertRaises(TypeError):
-            self.__str__(None)
+            Rectangle(8, 4, 1, 3, 55).__str__(None)
 
     def test_bool_true(self):
         with self.assertRaises(TypeError):
-            self.__str__(True)
+            Rectangle(8, 4, 1, 3, 55).__str__(True)
 
     def test_bool_false(self):
         with self.assertRaises(TypeError):
-            self.__str__(False)
+            Rectangle(8, 4, 1, 3, 55).__str__(False)
 
 
 class TestRectangle_update(unittest.TestCase):
@@ -755,6 +785,26 @@ class TestRectangle_update(unittest.TestCase):
         with self.assertRaises(TypeError):
             r1.update(*args)
 
+    def test_insert_number_id(self):
+        r1 = Rectangle(8, 4, 1, 3, 55).update(89)
+        self.assertEqual(r1.__str__(), 'None')
+
+    def test_insert_number_width(self):
+        r1 = Rectangle(8, 4, 1, 3, 55).update(89, 1)
+        self.assertEqual(r1.__str__(), 'None')
+
+    def test_insert_number_height(self):
+        r1 = Rectangle(8, 4, 1, 3, 55).update(89, 1, 2)
+        self.assertEqual(r1.__str__(), 'None')
+
+    def test_insert_number_x(self):
+        r1 = Rectangle(8, 4, 1, 3, 55).update(89, 1, 2, 3)
+        self.assertEqual(r1.__str__(), 'None')
+
+    def test_insert_number_y(self):
+        r1 = Rectangle(8, 4, 1, 3, 55).update(89, 1, 2, 3, 4)
+        self.assertEqual(r1.__str__(), 'None')
+
     def test_positive_number(self):
         r1 = Rectangle(8, 4, 1, 3, 55)
         args = 4
@@ -791,10 +841,29 @@ class TestRectangle_update(unittest.TestCase):
         r1.update(*args)
         self.assertEqual(r1.__str__(), '[Rectangle] (1) 4/5 - 2/3')
 
-    def test_dict(self):
+    def test_dict_id(self):
         r1 = Rectangle(8, 4, 1, 3, 55)
-        kwargs = {"id": 1, "width": 2, "height": 3, "x": 4, "y": 5}
-        r1.update(**kwargs)
+        r1.update(**{"id": 1})
+        self.assertEqual(r1.__str__(), '[Rectangle] (1) 1/3 - 8/4')
+
+    def test_dict_width(self):
+        r1 = Rectangle(8, 4, 1, 3, 55)
+        r1.update(**{"id": 1, "width": 2})
+        self.assertEqual(r1.__str__(), '[Rectangle] (1) 1/3 - 2/4')
+
+    def test_dict_height(self):
+        r1 = Rectangle(8, 4, 1, 3, 55)
+        r1.update(**{"id": 1, "width": 2, "height": 3})
+        self.assertEqual(r1.__str__(), '[Rectangle] (1) 1/3 - 2/3')
+
+    def test_dict_x(self):
+        r1 = Rectangle(8, 4, 1, 3, 55)
+        r1.update(**{"id": 1, "width": 2, "height": 3, "x": 4})
+        self.assertEqual(r1.__str__(), '[Rectangle] (1) 4/3 - 2/3')
+
+    def test_dict_y(self):
+        r1 = Rectangle(8, 4, 1, 3, 55)
+        r1.update(**{"id": 1, "width": 2, "height": 3, "x": 4, "y": 5})
         self.assertEqual(r1.__str__(), '[Rectangle] (1) 4/5 - 2/3')
 
     def test_set(self):
@@ -851,24 +920,24 @@ class TestRectangle_update(unittest.TestCase):
         with self.assertRaises(TypeError):
             r1.update(*args)
 
+    def test_no_args(self):
+        r1 = Rectangle(8, 4, 1, 3, 55)
+        r1.update()
+        self.assertEqual(r1.__str__(), '[Rectangle] (55) 1/3 - 8/4')
+
 
 class TestRectangle_to_dictionary(unittest.TestCase):
     """ Unittests for testing 'to_dictionary(self)'
         public method of Rectangle class
 
     """
-    @classmethod
-    def setUp(self):
-        """ Create Rectangle instance """
-        r1 = Rectangle(8, 4, 1, 3, 55)
-        self.to_dictionary = r1.to_dictionary
 
     def test_output_type(self):
-        d = self.to_dictionary()
+        d = Rectangle(8, 4, 1, 3, 55).to_dictionary()
         self.assertIsInstance(d, dict)
 
     def test_no_args(self):
-        d = self.to_dictionary()
+        d = Rectangle(8, 4, 1, 3, 55).to_dictionary()
         self.assertIsNotNone(d)
         self.assertDictEqual(d,
                              {
@@ -881,19 +950,598 @@ class TestRectangle_to_dictionary(unittest.TestCase):
 
     def test_with_args(self):
         with self.assertRaises(TypeError):
-            self.to_dictionary(3, 4)
+            Rectangle(8, 4, 1, 3, 55).to_dictionary(3, 4)
 
     def test_None(self):
         with self.assertRaises(TypeError):
-            self.to_dictionary(None)
+            Rectangle(8, 4, 1, 3, 55).to_dictionary(None)
 
     def test_bool_true(self):
         with self.assertRaises(TypeError):
-            self.to_dictionary(True)
+            Rectangle(8, 4, 1, 3, 55).to_dictionary(True)
 
     def test_bool_false(self):
         with self.assertRaises(TypeError):
-            self.to_dictionary(False)
+            Rectangle(8, 4, 1, 3, 55).to_dictionary(False)
+
+
+class TestRectangle_to_json_string(unittest.TestCase):
+    """ Unittests for testing 'to_json_string(list_dictionaries)'
+        static method of the Rectangle class
+
+    """
+
+    def test_empty_list(self):
+        self.assertEqual("[]", Rectangle.to_json_string([]))
+
+    def test__None(self):
+        self.assertEqual("[]", Rectangle.to_json_string(None))
+
+    def test_bool_true(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(True)
+
+    def test_bool_false(self):
+        self.assertEqual("[]", Rectangle.to_json_string(False))
+
+    def test_positive_number(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(4)
+
+    def test_negative_number(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(-4)
+
+    def test_float(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(4.9999)
+
+    def test_complex(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(complex(5))
+
+    def test_str(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string("4")
+
+    def test_tuple(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(("4", 4))
+
+    def test_dict(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string({"id": 4})
+
+    def test_set(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string({12, 24, 36})
+
+    def test_frozenset(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(frozenset({12, 24, 36}))
+
+    def test_range(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(range(5))
+
+    def test_bytes(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(b'AtoZ')
+
+    def test_bytearray(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(bytearray(b'AtoZ'))
+
+    def test_memoryview(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(memoryview(b'AtoZ'))
+
+    def test_Inf(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(float('Inf'))
+
+    def test_negative_Inf(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(float('-Inf'))
+
+    def test_NaN(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.to_json_string(float('NaN'))
+
+    def test_no_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.to_json_string()
+
+    def test_more_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.to_json_string([], [])
+
+
+class TestRectangle_save_to_file(unittest.TestCase):
+    """ Unittests for testing 'save_to_file(cls, list_objs)'
+        class method for Rectangle class
+
+    """
+
+    @classmethod
+    def tearDown(self):
+        """ Delete created files """
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+
+    def test_create_new_file(self):
+        r1 = Rectangle(12, 20, 1, 1, 19)
+        Rectangle.save_to_file([r1])
+        stream = str()
+        with open("Rectangle.json", "r") as f:
+            stream += f.read()
+        res = json.loads(stream)
+        self.assertEqual(res[0].get('id'), 19)
+        self.assertEqual(res[0].get('_Rectangle__width'), 12)
+        self.assertEqual(res[0].get('_Rectangle__height'), 20)
+        self.assertEqual(res[0].get('_Rectangle__x'), 1)
+        self.assertEqual(res[0].get('_Rectangle__y'), 1)
+
+    def test_overwrite_file(self):
+        r1 = Rectangle(24, 30, 2, 3, 11)
+        r2 = Rectangle(36, 40, 5, 6, 8)
+        Rectangle.save_to_file([r1])
+        stream1 = str()
+        with open("Rectangle.json", "r") as f1:
+            stream1 += f1.read()
+        res = json.loads(stream1)
+        self.assertEqual(res[0].get('id'), 11)
+        self.assertEqual(res[0].get('_Rectangle__width'), 24)
+        self.assertEqual(res[0].get('_Rectangle__height'), 30)
+        self.assertEqual(res[0].get('_Rectangle__x'), 2)
+        self.assertEqual(res[0].get('_Rectangle__y'), 3)
+        Rectangle.save_to_file([r2])
+        stream2 = str()
+        with open("Rectangle.json", "r") as f2:
+            stream2 += f2.read()
+        res = json.loads(stream2)
+        self.assertEqual(res[0].get('id'), 8)
+        self.assertEqual(res[0].get('_Rectangle__width'), 36)
+        self.assertEqual(res[0].get('_Rectangle__height'), 40)
+        self.assertEqual(res[0].get('_Rectangle__x'), 5)
+        self.assertEqual(res[0].get('_Rectangle__y'), 6)
+
+    def test_None(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(None)
+
+    def test_empty_list(self):
+        Rectangle.save_to_file([])
+        stream = str()
+        with open("Rectangle.json", "r") as f:
+            stream += f.read()
+        self.assertEqual("[]", stream)
+
+    def test_list_rectangle(self):
+        Rectangle.save_to_file([Rectangle(1, 2)])
+        stream = str()
+        with open("Rectangle.json", "r") as f:
+            stream += f.read()
+        self.assertEqual(len(str(Rectangle(1, 2).__dict__)) + 2, len(stream))
+
+    def test_bool_true(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(True)
+
+    def test_bool_false(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(False)
+
+    def test_positive_number(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(4)
+
+    def test_negative_number(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(-4)
+
+    def test_float(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(4.9999)
+
+    def test_complex(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(complex(5))
+
+    def test_str(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file("4")
+
+    def test_tuple(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(("4", 4))
+
+    def test_dict(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file({"id": 4})
+
+    def test_set(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file({12, 24, 36})
+
+    def test_frozenset(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(frozenset({12, 24, 36}))
+
+    def test_range(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(range(5))
+
+    def test_bytes(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(b'AtoZ')
+
+    def test_bytearray(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(bytearray(b'AtoZ'))
+
+    def test_memoryview(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(memoryview(b'AtoZ'))
+
+    def test_Inf(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(float('Inf'))
+
+    def test_negative_Inf(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(float('-Inf'))
+
+    def test_NaN(self):
+        with self.assertRaises(AssertionError):
+            Rectangle.save_to_file(float('NaN'))
+
+    def test_no_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file()
+
+    def test_more_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file([1], [12])
+
+
+class TestRectangle_from_json_string(unittest.TestCase):
+    """ Unittests for testing 'from_json_string(json_string)'
+        static method of Rectangle class
+
+    """
+
+    def test_output_type(self):
+        list_output = Rectangle.from_json_string('[{"id": 4}]')
+        self.assertIsInstance(list_output, list)
+
+    def test_None(self):
+        self.assertEqual([], Rectangle.from_json_string(None))
+
+    def test_empty_list(self):
+        self.assertEqual([], Rectangle.from_json_string("[]"))
+
+    def test_bool_true(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(True)
+
+    def test_bool_false(self):
+        self.assertEqual([], Rectangle.from_json_string(False))
+
+    def test_positive_number(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(4)
+
+    def test_negative_number(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(-4)
+
+    def test_float(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(4.9999)
+
+    def test_complex(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(complex(5))
+
+    def test_str(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string("4")
+
+    def test_tuple(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(("4", 4))
+
+    def test_dict(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string({"id": 4})
+
+    def test_set(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string({12, 24, 36})
+
+    def test_frozenset(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(frozenset({12, 24, 36}))
+
+    def test_range(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(range(5))
+
+    def test_bytes(self):
+        with self.assertRaises(json.decoder.JSONDecodeError):
+            Rectangle.from_json_string(b'AtoZ')
+
+    def test_bytearray(self):
+        with self.assertRaises(json.decoder.JSONDecodeError):
+            Rectangle.from_json_string(bytearray(b'AtoZ'))
+
+    def test_memoryview(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(memoryview(b'AtoZ'))
+
+    def test_Inf(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(float('Inf'))
+
+    def test_negative_Inf(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(float('-Inf'))
+
+    def test_NaN(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string(float('NaN'))
+
+    def test_no_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string()
+
+    def test_more_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string([], 4)
+
+
+class TestRectangle_create(unittest.TestCase):
+    """ Unittests for testing 'create(cls, **dictionary)'
+        class method of Rectangle class
+
+    """
+
+    def test_None(self):
+        kwargs = None
+        r1 = Rectangle(1, 2)
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_empty_dictionary(self):
+        kwargs = {}
+        r1 = Rectangle(1, 2)
+        r2 = r1.create(**kwargs)
+        self.assertIsInstance(r2, Rectangle)
+
+    def test_dict_id(self):
+        kwargs = {'id': 89}
+        r1 = Rectangle(1, 2)
+        r2 = r1.create(**kwargs)
+        self.assertEqual(r2.__dict__.get('id'), kwargs.get('id'))
+
+    def test_dict_width(self):
+        r1 = Rectangle(1, 2)
+        kwargs = {'id': 89, 'width': 1}
+        r2 = r1.create(**kwargs)
+        self.assertEqual(r2.__dict__.get('id'), kwargs.get('id'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__width'),
+                         kwargs.get('width'))
+
+    def test_dict_height(self):
+        r1 = Rectangle(1, 2)
+        kwargs = {'id': 89, 'width': 1, 'height': 2}
+        r2 = r1.create(**kwargs)
+        self.assertEqual(r2.__dict__.get('id'), kwargs.get('id'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__width'),
+                         kwargs.get('width'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__height'),
+                         kwargs.get('height'))
+
+    def test_dict_x(self):
+        r1 = Rectangle(1, 2)
+        kwargs = {'id': 89, 'width': 1, 'height': 2, 'x': 3}
+        r2 = r1.create(**kwargs)
+        self.assertEqual(r2.__dict__.get('id'), kwargs.get('id'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__width'),
+                         kwargs.get('width'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__height'),
+                         kwargs.get('height'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__x'), kwargs.get('x'))
+
+    def test_dict_y(self):
+        r1 = Rectangle(1, 2)
+        kwargs = {'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4}
+        r2 = r1.create(**kwargs)
+        self.assertEqual(r2.__dict__.get('id'), kwargs.get('id'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__width'),
+                         kwargs.get('width'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__height'),
+                         kwargs.get('height'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__x'), kwargs.get('x'))
+        self.assertEqual(r2.__dict__.get('_Rectangle__y'), kwargs.get('y'))
+
+    def test_bool_true(self):
+        r1 = Rectangle(1, 2)
+        kwargs = True
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_bool_false(self):
+        r1 = Rectangle(1, 2)
+        kwargs = False
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_positive_number(self):
+        r1 = Rectangle(1, 2)
+        kwargs = 4
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_negative_number(self):
+        r1 = Rectangle(1, 2)
+        kwargs = -4
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_float(self):
+        r1 = Rectangle(1, 2)
+        kwargs = 4.99999
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_complex(self):
+        r1 = Rectangle(1, 2)
+        kwargs = complex(5)
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_str(self):
+        r1 = Rectangle(1, 2)
+        kwargs = "4"
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_tuple(self):
+        r1 = Rectangle(1, 2)
+        kwargs = ("4", 4)
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_set(self):
+        r1 = Rectangle(1, 2)
+        kwargs = {12, 24, 36}
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_frozenset(self):
+        r1 = Rectangle(1, 2)
+        kwargs = frozenset({12, 24, 36})
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_range(self):
+        r1 = Rectangle(1, 2)
+        kwargs = range(5)
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_bytes(self):
+        r1 = Rectangle(1, 2)
+        kwargs = b'AtoZ'
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_bytearray(self):
+        r1 = Rectangle(1, 2)
+        kwargs = bytearray(b'AtoZ')
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_memoryview(self):
+        r1 = Rectangle(1, 2)
+        kwargs = memoryview(b'AtoZ')
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_Inf(self):
+        r1 = Rectangle(1, 2)
+        kwargs = float('Inf')
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_negative_Inf(self):
+        r1 = Rectangle(1, 2)
+        kwargs = float('-Inf')
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_NaN(self):
+        r1 = Rectangle(1, 2)
+        kwargs = float('NaN')
+        with self.assertRaises(TypeError):
+            r1.create(**kwargs)
+
+    def test_no_args(self):
+        r1 = Rectangle(1, 2)
+        r2 = r1.create()
+        self.assertIsInstance(r2, Rectangle)
+
+    def test_more_args(self):
+        r1 = Rectangle(1, 2)
+        d1 = {"id": 2}
+        d2 = {"age": 2}
+        with self.assertRaises(TypeError):
+            r1.create(d1, d2)
+
+
+class TestRectangle_load_from_file(unittest.TestCase):
+    """Unittests for testing 'load_from_file(cls)'
+        class method of Rectangle class
+
+    """
+
+    @classmethod
+    def setUp(self):
+        """ Create file if it doesn't exist """
+        try:
+            Rectangle.save_to_file([Rectangle(1, 2)])
+        except IOError:
+            pass
+
+    @classmethod
+    def tearDown(self):
+        """ Delete any created files """
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+
+    def test_output_type(self):
+        b = Rectangle.load_from_file()
+        self.assertIsInstance(b, list)
+
+    def test_no_args(self):
+        b = Rectangle.load_from_file()
+        self.assertIsNotNone(b)
+        self.assertIsInstance(b, list)
+
+    def test_with_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.load_from_file([], 1)
+
+    def test_None(self):
+        with self.assertRaises(TypeError):
+            Rectangle.load_from_file(None)
+
+    def test_bool_true(self):
+        with self.assertRaises(TypeError):
+            Rectangle.load_from_file(True)
+
+    def test_bool_false(self):
+        with self.assertRaises(TypeError):
+            Rectangle.load_from_file(False)
+
+    def test_file_exists(self):
+        r1 = Rectangle.load_from_file()
+        self.assertIsInstance(r1, list)
+        self.assertEqual(r1[0].__class__.__name__, 'Rectangle')
+
+    def test_file_not_found(self):
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+        with self.assertRaises(FileNotFoundError):
+            Rectangle.load_from_file()
 
 
 if __name__ == "__main__":
