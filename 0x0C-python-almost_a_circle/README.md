@@ -1,6 +1,5 @@
 # Unittest on Inheritance
 
-#### Base Geometry Class
 1. [Class Base](models/base.py) => [Unittest for Class Base](tests/test_models/test_base.py)
 
 > ***`class Base`***
@@ -14,7 +13,6 @@
 >* class method `def load_from_file(cls):` that returns a list of instances
 
 
-#### Rectangle Class
 2. [Class Rectangle](models/rectangle.py) => [Unittest for Class Rectangle](tests/test_models/test_rectangle.py)
 
 > ***`class Rectangle`*** that inherits from ***`class Base`***
@@ -29,7 +27,6 @@
 >* public method `def to_dictionary(self):` that returns the dictionary representation of a Rectangle:
 
 
-#### Square Class
 3. [Class Square](models/square.py) => [Unittest for Class Square](tests/test_models/test_square.py)
 
 > `class Square` that inherits from `class Rectangle`
