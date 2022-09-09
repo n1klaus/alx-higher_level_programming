@@ -1,1 +1,21 @@
-0-list_databases.sql
+- ***0-list_databases.sql*** - list databases
+- ***1-create_database_if_missing.sql*** - create a database
+- ***2-remove_database.sql*** - delete a database
+- ***3-list_tables.sql*** - list tables
+- ***4-first_table.sql*** - create table
+- ***5-full_table.sql*** - print full description of the table
+- ***6-list_values.sql*** - list all rows of the table
+- ***7-insert_value.sql*** - insert new row into the table
+- ***8-count_89.sql*** - display number of records with id = 89
+- ***9-full_creation.sql*** - create table and add records
+- ***10-top_score.sql*** - lists all records of the table second_table in desc order
+- ***11-best_score.sql*** - lists all records of the table second_table with score >= 10 in desc order
+- ***12-no_cheating.sql*** - updates the table second_table with score of 10 for name Bob
+- ***13-change_class.sql*** - removes all records of the table second_table with score <= 5
+- ***14-average.sql*** - computes the score average of all records in the table second_table
+- ***15-groups.sql*** - lists number of records with same score from the table second_table in desc order
+- ***16-no_link.sql*** - lists all records with name value from the table second_table in desc order
+- ***100-move_to_utf8.sql*** - converts hbtn_0c_0 database to `UTF8` (`utf8mb4`, collate `utf8mb4_unicode_ci`) in your MySQL server
+- ***101-avg_temperatures.sql*** - displays the average temperature (Fahrenheit) by city ordered by temperature (descending)
+- ***102-top_city.sql*** - displays the top 3 of cities temperature during July and August ordered by temperature (descending)
+- ***103-max_state.sql*** - displays the max temperature of each state (ordered by State name)
