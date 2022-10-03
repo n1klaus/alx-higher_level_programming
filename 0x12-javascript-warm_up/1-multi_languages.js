@@ -1,5 +1,5 @@
 #!/usr/bin/node
 
-const myString = ["C is fun", "Python is cool", "JavaScript is amazing"];
-printItem = (item) => console.log(item);
-printItem(myString);
+const myString = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
+const printItem = (item) => console.log(item);
+myString.map(printItem);
