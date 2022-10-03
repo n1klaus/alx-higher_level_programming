@@ -3,6 +3,6 @@
 if (process.argv[2]) {
   console.log(process.argv[2]);
 } else {
-  process.stderr.write('No argument\n');
+  console.log('No argument');
 }
 process.exit(1);
