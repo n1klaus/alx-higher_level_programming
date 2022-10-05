@@ -3,7 +3,7 @@
 if (process.argv.length === 2) {
   console.log(0);
 } else if (process.argv.length === 3) {
-  console.log(1);
+  console.log(0);
 } else {
   const myList = [];
   for (let i = 2; i < process.argv.length; i++) {
@@ -11,5 +11,5 @@ if (process.argv.length === 2) {
   }
   const compareFn = (a, b) => a - b;
   myList.sort(compareFn);
-  console.log(myList.length - 2);
+  console.log(myList[myList.length - 2]);
 }
