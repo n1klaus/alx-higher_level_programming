@@ -5,7 +5,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sys import argv
+from sys import argv, stdout, exit
 import urllib.parse
 from model_state import Base, State
 
@@ -24,4 +24,5 @@ if __name__ == "__main___":
         Session.configure(bind=engine)
         session = Session()
         for instance in session.query(State).order_by(State.id).all():
-            print(f"{instance.id}: {instance.name}")
+            stdout.write(f"{instance.id}: {instance.name}")
+        exit()
