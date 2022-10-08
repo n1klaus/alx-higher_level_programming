@@ -28,10 +28,10 @@ if __name__ == "__main__":
                                  passwd=MY_PASSWORD,
                                  db=MY_DB)
             cur = db.cursor()
-            cur.execute(""" SELECT * FROM states
-                            WHERE name = %s
-                            ORDER BY id ASC
-                        """, (MY_STATE,))
+            cur.execute(" SELECT * FROM states\
+                            WHERE name = '{0}'\
+                            ORDER BY id ASC\
+                        ".format(MY_STATE))
             row = cur.fetchall()
             for col in row:
                 print("{0}".format(col))
