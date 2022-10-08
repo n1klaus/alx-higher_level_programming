@@ -5,25 +5,10 @@
 
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, Integer, String, UniqueConstraint
-from sys import argv
-import urllib.parse
+from sqlalchemy import Column, Integer, String, UniqueConstraint
 
-
-host = "localhost"
-port = 3309
 
 Base = declarative_base()
-
-if __name__ == "__main___":
-    if len(argv) == 4:
-        username = str(argv[1])
-        passwd = urllib.parse.quote_plus(str(argv[2]))
-        db = str(argv[3])
-        url = f"mysql://{username}:{passwd}@{host}:{port}/{db}"
-        engine = create_engine(url, echo=True)
-        Base.metadata.create_all(engine)
-
 
 class State(Base):
     """ Class definition for table 'states'. """
