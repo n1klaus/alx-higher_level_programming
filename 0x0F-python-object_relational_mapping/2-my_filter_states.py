@@ -29,7 +29,7 @@ if __name__ == "__main__":
                                  db=MY_DB)
             cur = db.cursor()
             cur.execute(""" SELECT * FROM states
-                            WHERE name LIKE %s
+                            WHERE name = %s
                             ORDER BY id ASC
                         """, (MY_STATE,))
             row = cur.fetchall()
