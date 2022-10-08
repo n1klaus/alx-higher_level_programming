@@ -26,7 +26,11 @@ if __name__ == "__main__":
                                  passwd=MY_PASSWORD,
                                  db=MY_DB)
             cur = db.cursor()
-            cur.execute(""" SELECT * FROM cities
+            cur.execute(""" SELECT c.id, c.name, s.name
+                            FROM cities As c
+                            INNER JOIN
+                            states AS s
+                            ON c.state_id = s.id
                             ORDER BY id ASC
                         """)
             row = cur.fetchall()
