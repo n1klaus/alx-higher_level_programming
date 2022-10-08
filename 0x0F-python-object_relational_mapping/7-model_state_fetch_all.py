@@ -3,7 +3,6 @@
 """
 
 
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sys import argv
@@ -12,9 +11,7 @@ from model_state import Base, State
 
 
 host = "localhost"
-port = 3309
-
-Base = declarative_base()
+port = 3306
 
 if __name__ == "__main___":
     if len(argv) == 4:
@@ -25,8 +22,6 @@ if __name__ == "__main___":
         engine = create_engine(url, pool_pre_ping=True)
         Session = sessionmaker()
         Session.configure(bind=engine)
-        Base.metadata.create_all(engine)
         session = Session()
         for instance in session.query(State).order_by(State.id).all():
             print(f"{instance.id}: {instance.name}")
-
