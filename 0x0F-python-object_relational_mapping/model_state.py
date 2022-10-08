@@ -10,6 +10,7 @@ from sqlalchemy import Column, Integer, String, UniqueConstraint
 
 Base = declarative_base()
 
+
 class State(Base):
     """ Class definition for table 'states'. """
     __tablename__ = "states"
