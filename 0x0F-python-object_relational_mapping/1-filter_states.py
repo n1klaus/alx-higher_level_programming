@@ -28,8 +28,9 @@ if __name__ == "__main__":
                                  db=MY_DB)
             cur = db.cursor()
             cur.execute(""" SELECT * FROM states
-                            WHERE upper(name) LIKE "N%"
-                            ORDER BY id ASC """)
+                            WHERE name LIKE "N%"
+                            ORDER BY id ASC
+                        """)
             row = cur.fetchall()
             for col in row:
                 print("{0}".format(col))
