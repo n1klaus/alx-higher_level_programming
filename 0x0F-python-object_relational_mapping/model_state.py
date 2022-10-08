@@ -5,6 +5,7 @@
 
 
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, UniqueConstraint
 
 
@@ -16,4 +17,5 @@ class State(Base):
     __tablename__ = "states"
     id = Column(Integer, autoincrement=True, nullable=False, primary_key=True)
     name = Column(String(128), nullable=False)
+    city = relationship("City")
     __table_args__ = (UniqueConstraint("id"), )
