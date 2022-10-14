@@ -5,11 +5,10 @@
 
 
 from sqlalchemy.orm import declarative_base, relationship
-from sqlalchemy import create_engine, Column, Integer, String, UniqueConstraint
-from sys import argv, exit
+from sqlalchemy import Metadata, Column, Integer, String, UniqueConstraint
 
-
-Base = declarative_base()
+meta = Metadata()
+Base = declarative_base(metadata=meta)
 
 
 class State(Base):
@@ -19,20 +18,3 @@ class State(Base):
     name = Column(String(128), nullable=False)
     city = relationship("City")
     __table_args__ = (UniqueConstraint("id"), )
-
-
-if __name__ == '__main__':
-    if len(argv) == 4:
-        host = 'localhost'
-        port = 3306
-        try:
-            user = str(argv[1])
-            passwd = str(argv[2])
-            db = str(argv[3])
-            db_url = f"mysql+mysqldb//{user}:{passwd}@{host}:{port}/{db}"
-            engine = create_engine(db_url, pool_pre_ping=True)
-            Base.metadata.create_all(engine)
-        except Exception:
-            raise
-        finally:
-            exit()
