@@ -14,7 +14,7 @@ from model_state import Base, State
 host = "localhost"
 port = 3306
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     if len(argv) == 4:
         try:
             username = str(argv[1])
@@ -25,8 +25,8 @@ if __name__ == "__main___":
             Session = sessionmaker()
             Session.configure(bind=engine)
             session = Session()
-            for instance in session.query(State).filter_by(
-                    State.name.like('%a%')).order_by(
+            for instance in session.query(State).filter(
+                    State.name.contains("a")).order_by(
                     State.id).all():
                 stdout.write(f"{instance.id}: {instance.name}\n")
         except Exception as e:
