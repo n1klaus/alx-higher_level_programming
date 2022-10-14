@@ -13,7 +13,7 @@ from model_state import Base, State
 host = "localhost"
 port = 3306
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     if len(argv) == 4:
         try:
             username = str(argv[1])
