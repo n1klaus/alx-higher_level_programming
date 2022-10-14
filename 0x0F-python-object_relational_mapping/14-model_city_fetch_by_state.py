@@ -13,7 +13,7 @@ from model_state import Base, State
 host = "localhost"
 port = 3306
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     if len(argv) == 4:
         try:
             username = str(argv[1])
@@ -21,14 +21,15 @@ if __name__ == "__main___":
             db = str(argv[3])
             url = f"mysql+mysqldb://{username}:{passwd}@{host}:{port}/{db}"
             engine = create_engine(url, pool_pre_ping=True)
+            Base.metadata.create_all(engine)
             Session = sessionmaker()
             Session.configure(bind=engine)
             session = Session()
-            for state_name, city_id, city_name in\
-                    session.query(State.name, City.id, City.name).join(
-                                  City.state_id, State.id).order_by(
-                                  City.id).all():
-                stdout.write(f"{state_name}: ({city_id}) {city_name}\n")
+            for instance in (session.query(
+                                 State.name, City.id, City.name).filter(
+                                 City.state_id == State.id).order_by(
+                                 City.id).all()):
+                stdout.write(f"{instance[0]}: ({instance[1]}) {instance[2]}\n")
         except Exception as e:
             raise
         finally:
