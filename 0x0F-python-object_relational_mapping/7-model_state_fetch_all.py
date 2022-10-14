@@ -13,20 +13,18 @@ from model_state import Base, State
 host = "localhost"
 port = 3306
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     if len(argv) == 4:
-        try:
-            username = str(argv[1])
-            passwd = urllib.parse.quote_plus(str(argv[2]))
-            db = str(argv[3])
-            url = f"mysql+mysqldb://{username}:{passwd}@{host}:{port}/{db}"
-            engine = create_engine(url, pool_pre_ping=True)
-            Session = sessionmaker()
-            Session.configure(bind=engine)
-            session = Session()
-            for instance in session.query(State).order_by(State.id).all():
-                stdout.write(f"{instance.id}: {instance.name}\n")
-        except Exception as e:
-            raise
-        finally:
-            exit()
+        username = str(argv[1])
+        passwd = urllib.parse.quote_plus(str(argv[2]))
+        db = str(argv[3])
+        url = f"mysql+mysqldb://{username}:{passwd}@{host}:{port}/{db}"
+        engine = create_engine(url)
+        Base.metadata.create_all(engine)
+        Session = sessionmaker()
+        Session.configure(bind=engine)
+        session = Session()
+        for instance in session.query(State).order_by(State.id).all():
+            stdout.write(f"{instance.id}: {instance.name}\n")
+        session.close()
+    exit()
