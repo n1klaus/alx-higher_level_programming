@@ -29,7 +29,7 @@ if __name__ == "__main__":
                                  db=MY_DB)
             cur = db.cursor()
             cur.execute(" SELECT * FROM `states`\
-                            WHERE `name` = '{0}'\
+                            WHERE BINARY `name` = '{0}'\
                             ORDER BY `id` ASC\
                         ".format(MY_STATE))
             row = cur.fetchall()
