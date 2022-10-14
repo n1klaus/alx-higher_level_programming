@@ -28,7 +28,7 @@ if __name__ == "__main__":
                                  db=MY_DB)
             cur = db.cursor()
             cur.execute(""" SELECT * FROM states
-                            WHERE name LIKE "N%"
+                            WHERE BINARY name LIKE "N%"
                             ORDER BY id ASC
                         """)
             row = cur.fetchall()
