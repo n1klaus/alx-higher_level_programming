@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ Module containing the class definition of a City
-    and an instance of a declarative base.
 """
 
 
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint
-from model_state import Base
+from relationship_state import Base
 
 
 class City(Base):
