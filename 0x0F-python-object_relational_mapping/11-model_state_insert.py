@@ -13,7 +13,7 @@ from model_state import Base, State
 host = "localhost"
 port = 3306
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     if len(argv) == 4:
         try:
             my_state = "Louisiana"
@@ -27,9 +27,9 @@ if __name__ == "__main___":
             session = Session()
             session.add(State(name=my_state))
             session.commit()
-            for instance in session.query(State).filter(
-                    State.name == my_state).one():
-                stdout.write(f"{instance.id}\n")
+            instance = session.query(State).filter(
+                    State.name == my_state).first()
+            stdout.write(f"{instance.id}\n")
         except Exception as e:
             raise
         finally:
