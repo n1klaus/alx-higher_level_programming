@@ -26,7 +26,8 @@ if __name__ == "__main__":
             Session.configure(bind=engine)
             session = Session()
             session.query(State).filter(
-                        State.name.contains("a")).delete(synchronize_session=False)
+                                        State.name.contains("a")).delete(
+                                        synchronize_session=False)
             session.commit()
         except Exception as e:
             raise
