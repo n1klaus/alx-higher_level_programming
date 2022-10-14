@@ -14,7 +14,7 @@ from model_state import Base, State
 host = "localhost"
 port = 3306
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     if len(argv) == 5:
         try:
             username = str(argv[1])
@@ -27,8 +27,8 @@ if __name__ == "__main___":
             Session.configure(bind=engine)
             session = Session()
             instance = session.query(State).filter(
-                       State.name == my_state).one()
-            if instance is not None:
+                       State.name == (my_state,)).first()
+            if instance:
                 stdout.write(f"{instance.id}\n")
             else:
                 stdout.write(f"Not found\n")
