@@ -5,9 +5,9 @@
 
 
 from sqlalchemy.orm import declarative_base, relationship
-from sqlalchemy import Metadata, Column, Integer, String, UniqueConstraint
+from sqlalchemy import Column, Integer, String, UniqueConstraint, MetaData
 
-meta = Metadata()
+meta = MetaData()
 Base = declarative_base(metadata=meta)
 
 
