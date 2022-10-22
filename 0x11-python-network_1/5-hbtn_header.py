@@ -13,7 +13,7 @@ def fetch_url(url):
         with requests.get(url) as resp:
             resp_headers = resp.headers
             print(f"{dict(resp_headers).get('X-Request-Id')}")
-    except requests.exceptions as e:
+    except requests.exceptions.RequestException as e:
         pass
 
 
