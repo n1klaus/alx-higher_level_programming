@@ -14,6 +14,8 @@ def fetch_url(url):
             html = resp.read()
             print(f"{str(html, 'utf-8')}")
     except URLError as e:
+        if hasattr(e, "reason"):
+            print(f"Error Reason: {e.reason}")
         if hasattr(e, "code"):
             print(f"Error code: {e.code}")
 
