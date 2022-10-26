@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #  Takes in a URL, sends a GET request to that URL,
 #+ and displays the body of the response
 code=$(curl -X GET -L -s -w "\n%{http_code}" "$1" | tail -n 1)
