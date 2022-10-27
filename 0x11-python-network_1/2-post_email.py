@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" Takes in a URL and an email, sends a POST request to the passed URL
+"""
+    Takes in a URL and an email, sends a POST request to the passed URL
     with the email and displays the body of the response utf-8 decoded
 """
 from urllib.request import urlopen, Request
