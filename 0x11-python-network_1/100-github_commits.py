@@ -23,9 +23,11 @@ def list_commits(repo, owner):
                 sha = f"{x['sha']}"
                 author = f"{x['commit']['author']['name']}"
                 commitDict[date] = f"{sha}: {author}"
-            commitList = sorted(commitDict.values(), reverse=True)
+            commitDict = dict(sorted(commitDict.items(), reverse=True))
+            commitList = list(commitDict.values())
             for i in range(10):
                 print(f"{commitList[i]}")
+#               print(f"{list(commitDict.items())[i]}")
     except BaseException as e:
         print(f"None")
 
