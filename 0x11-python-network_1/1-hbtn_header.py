@@ -3,7 +3,7 @@
     and displays the value of the X-Request-Id variable
     found in the header of the response.
 """
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from urllib.error import URLError
 from sys import argv
 
@@ -11,7 +11,8 @@ from sys import argv
 def fetch_url(url):
     """ Fetch from provided URL """
     try:
-        with urlopen(url) as resp:
+        req = Request(url)
+        with urlopen(req) as resp:
             html = resp.read()
             print(f"{dict(resp.info())['X-Request-Id']}")
     except URLError as e:
