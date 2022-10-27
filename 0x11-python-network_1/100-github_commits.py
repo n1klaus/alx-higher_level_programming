@@ -17,9 +17,15 @@ def list_commits(repo, owner):
             commits = resp.json()
             if len(commits) == 0:
                 raise
+            commitDict = {}
+            for x in commits:
+                date = f"{x['commit']['author']['date']}"
+                sha = f"{x['sha']}"
+                author = f"{x['commit']['author']['name']}"
+                commitDict[date] = f"{sha}: {author}"
+            commitList = sorted(commitDict.values(), reverse=True)
             for i in range(10):
-                print(f"{commits[i]['sha']}: ", end="")
-                print(f"{commits[i]['commit']['author']['name']}")
+                print(f"{commitList[i]}")
     except BaseException as e:
         print(f"None")
 
