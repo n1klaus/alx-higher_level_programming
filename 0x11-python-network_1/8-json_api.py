@@ -14,13 +14,13 @@ def post_url(url, letter):
         with requests.post(url, data=data) as resp:
             json = resp.json()
             if resp.headers["Content-Type"] != "application/json":
-                print(f"Not a valid JSON")
+                raise
             if not json or len(json.keys()) == 0:
                 print(f"No result")
             else:
                 print(f"[{json.get('id')}] {json.get('name')}")
     except BaseException:
-        pass
+        print(f"Not a valid JSON")
 
 
 if __name__ == "__main__":
