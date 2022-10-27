@@ -7,24 +7,23 @@ from requests.auth import HTTPBasicAuth
 from sys import argv
 
 
-def post_url(username, password):
+def get_user(username, password):
     """ Send credentials to Github API """
     try:
-        url = "https://api.github.com"
+        url = "https://api.github.com/user"
         session = Session()
         session.auth = HTTPBasicAuth(username, password)
-        with session.post(url) as resp:
+        session.headers.update({"Accept": "application/vnd.github+json"})
+        with session.get(url) as resp:
             json = resp.json()
-            if not json or resp.status_code != 200:
+            if len(json.keys()) == 0:
                 raise
             print(f"{json.get('id')}")
     except BaseException as e:
-        if len(json.keys()) == 0:
-            print(f"No result")
         print(f"None")
 
 
 if __name__ == "__main__":
     username = str(argv[1]).strip()
     password = str(argv[2]).strip()
-    post_url(username, password)
+    get_user(username, password)
