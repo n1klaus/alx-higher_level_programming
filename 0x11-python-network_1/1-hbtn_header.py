@@ -13,7 +13,7 @@ def fetch_url(url):
     try:
         with urlopen(url) as resp:
             html = resp.read()
-            print(f"{dict(resp.info()).get('X-Request-Id')}")
+            print(f"{dict(resp.info())['X-Request-Id']}")
     except URLError as e:
         pass
 
