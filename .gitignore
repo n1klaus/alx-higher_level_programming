@@ -27,3 +27,6 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+node_modules
+package*
